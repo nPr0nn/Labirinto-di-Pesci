@@ -1,3 +1,2 @@
 # Ativer
-
-Um aplicativo para auxiliar estudantes da Unicamp clientes do serviço de segurança Ativa. Por meio deste será possível pedir os carros de escolta para levar a certos pontos de Barão Geraldo.
+Projeto da disciplina de engenharia de software (MC426) feito no segundo semestre de 2022. Jogo de terror surrealista feito em C++
