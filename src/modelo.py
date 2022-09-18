@@ -16,6 +16,7 @@ class Cube:
 
      def get_texture(self, path):
           texture = pg.image.load(path).convert()
+          texture = pg.transform.flip(texture,flip_x=False, flip_y=True)
           texture = self.ctx.texture(size=texture.get_size(),components=3,
                                         data=pg.image.tostring(texture,'RGB'))
           return texture
@@ -34,7 +35,7 @@ class Cube:
           self.shader_program['model_m'].write(self.model_m)
 
      def update(self):
-          model_m = glm.rotate(self.model_m, self.game.time, glm.vec3(0, 1, 0))
+          model_m = glm.rotate(self.model_m, self.game.time * 0.5, glm.vec3(0, 1, 0))
           self.shader_program['model_m'].write(model_m)
 
      def render(self):
