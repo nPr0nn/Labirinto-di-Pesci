@@ -5,7 +5,7 @@ class UI:
     def __init__(self):
         self.STATUS = "MENU"
         self.imagem = pygame.image.load("../assets/textures/jogar.png").convert()
-    
+
     def update(self):
         return
 
@@ -23,4 +23,3 @@ class UI:
         pass
         #screen.blit(self.imagem, (100,100))
 
-        

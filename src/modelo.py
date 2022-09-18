@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> b6b66121c0febcdea7d9da87eecc04b644a96dd6
 import numpy as np
 import glm
 import pygame as pg

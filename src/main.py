@@ -9,19 +9,15 @@ from moderngl_window import geometry
 
 from modelo import *
 from camera import Camera
-<<<<<<< HEAD
 from ui import UI
 
-=======
 from ilumination import Phong_Light
->>>>>>> b6b66121c0febcdea7d9da87eecc04b644a96dd6
 
 class Engine:
 
      resource_dir = (Path(__file__) / '../../resources').absolute()
 
      def __init__(self, win_size=(1080, 640)):
-          
           # Inicia o pygame
           pg.display.init()
           pg.display.set_caption("Jogo MC426")
@@ -36,7 +32,6 @@ class Engine:
 
           # Cria o contexto OpenGL
           self.screen = pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
-          
 
           # Configurações do mouse
           pg.event.set_grab(True)
@@ -59,12 +54,9 @@ class Engine:
           self.camera      = Camera(self)
 
           # Coisas
-<<<<<<< HEAD
           self.scene      = Cube(self)
           self.ui         = UI()
-=======
           self.scene       = Cube(self)
->>>>>>> b6b66121c0febcdea7d9da87eecc04b644a96dd6
 
      # Checa os eventos do pygame, em especial verifica se a janela foi fechada e destroi os objetos
      def check_events(self):
