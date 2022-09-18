@@ -1,12 +1,16 @@
+import sys
 import pygame   as pg
 import moderngl as mgl
 
-import sys
+from modelo import *
+from camera import Camera
+
 
 class Engine:
      def __init__(self, win_size=(1080, 640)):
           # Inicia o pygame
-          pg.init()
+          pg.display.init()
+          pg.display.set_caption("Jogo MC426")
 
           # Estabelece o tamanho da janela
           self.WIN_SIZE = win_size
@@ -19,10 +23,6 @@ class Engine:
           # Cria o contexto OpenGL
           pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
 
-          # Configura o mouse
-          # pg.event.set_grab(True)
-          # pg.mouse.set_visible(False)
-
           # Detecta e usa o contexto OpenGL escolhido
           self.ctx = mgl.create_context()
 
@@ -31,24 +31,36 @@ class Engine:
           self.time       = 0
           self.delta_time = 0
 
+          # Camera
+          self.camera     = Camera(self)
+
+          # Coisas
+          self.scene      = Cube(self)
+
      def check_events(self):
           for event in pg.event.get():
                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                    self.mesh.destroy()
+                    self.scene.destroy()
                     pg.quit()
                     sys.exit()
 
+     def get_time(self):
+          self.time = pg.time.get_ticks() * 0.001
+
      def render(self):
-          self.ctx.clear(color=(0.08, 0.16, 0.18))
+          self.ctx.clear(color=(0, 0, 0))
+          self.scene.render()
           pg.display.flip()
 
      def run(self):
           while True:
+               self.get_time()
                self.check_events()
                self.render()
                self.clock.tick(60)
+               self.delta_time = self.clock.tick(60)
 
 if __name__ == '__main__':
-     app = Engine()
-     app.run()
+     game = Engine()
+     game.run()
 
