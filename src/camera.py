@@ -46,10 +46,11 @@ class Camera:
           self.rotate()
           self.update_camera_vectors()
           self.view_m = self.get_view_matrix()
-     
+
      def move(self):
           velocity = SPEED * self.game.delta_time
           keys = pg.key.get_pressed()
+
           if keys[pg.K_w]:
                self.position += self.forward * velocity
           if keys[pg.K_s]:

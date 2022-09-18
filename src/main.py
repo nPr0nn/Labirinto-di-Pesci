@@ -4,7 +4,7 @@ import moderngl as mgl
 
 from modelo import *
 from camera import Camera
-
+from ilumination import Phong_Light
 
 class Engine:
      def __init__(self, win_size=(1080, 640)):
@@ -33,16 +33,20 @@ class Engine:
           self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
 
           # Cria um objeto para manter a contagem do tempo
-          self.clock      = pg.time.Clock()
-          self.time       = 0
-          self.delta_time = 0
+          self.clock       = pg.time.Clock()
+          self.time        = 0
+          self.delta_time  = 0
+
+          # Iluminação
+          self.phong_light = Phong_Light((3, 3, 3), (1, 0, 0))
 
           # Camera
-          self.camera     = Camera(self)
+          self.camera      = Camera(self)
 
           # Coisas
-          self.scene      = Cube(self)
+          self.scene       = Cube(self)
 
+     # Checa os eventos do pygame, em especial verifica se a janela foi fechada e destroi os objetos
      def check_events(self):
           for event in pg.event.get():
                if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
@@ -50,14 +54,17 @@ class Engine:
                     pg.quit()
                     sys.exit()
 
+     # Pega o tempo passado até agora
      def get_time(self):
           self.time = pg.time.get_ticks() * 0.001
 
+     # Rendereiza o background, a cena e atualiza a tela
      def render(self):
           self.ctx.clear(color=(0, 0, 0))
           self.scene.render()
           pg.display.flip()
 
+     # Game loop principal 
      def run(self):
           while True:
                self.get_time()
