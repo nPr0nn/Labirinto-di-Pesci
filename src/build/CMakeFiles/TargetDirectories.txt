@@ -1,3 +1,0 @@
-/home/lucas/p/cpp/gamedev/ativer/src/build/CMakeFiles/game.dir
-/home/lucas/p/cpp/gamedev/ativer/src/build/CMakeFiles/edit_cache.dir
-/home/lucas/p/cpp/gamedev/ativer/src/build/CMakeFiles/rebuild_cache.dir
