@@ -25,6 +25,8 @@ class Engine:
 
           # Detecta e usa o contexto OpenGL escolhido
           self.ctx = mgl.create_context()
+          #self.ctx.front_face = "cw"
+          self.ctx.enable(flags=mgl.DEPTH_TEST | mgl.CULL_FACE)
 
           # Cria um objeto para manter a contagem do tempo
           self.clock      = pg.time.Clock()
