@@ -1,4 +1,3 @@
-from msilib.schema import Component
 import numpy as np
 import glm
 import pygame as pg
@@ -37,6 +36,7 @@ class Cube:
      def update(self):
           model_m = glm.rotate(self.model_m, self.game.time * 0.5, glm.vec3(0, 1, 0))
           self.shader_program['model_m'].write(model_m)
+          self.shader_program['view_m'].write(self.game.camera.view_m)
 
      def render(self):
           self.update()
