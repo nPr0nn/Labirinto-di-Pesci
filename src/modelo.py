@@ -1,4 +1,4 @@
-from msilib.schema import Component
+
 import numpy as np
 import glm
 import pygame as pg

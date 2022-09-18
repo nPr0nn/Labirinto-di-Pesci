@@ -2,12 +2,22 @@ import sys
 import pygame   as pg
 import moderngl as mgl
 
+import math
+from pathlib import Path
+import moderngl_window
+from moderngl_window import geometry
+
 from modelo import *
 from camera import Camera
+from ui import UI
 
 
 class Engine:
+
+     resource_dir = (Path(__file__) / '../../resources').absolute()
+
      def __init__(self, win_size=(1080, 640)):
+          
           # Inicia o pygame
           pg.display.init()
           pg.display.set_caption("Jogo MC426")
@@ -21,7 +31,8 @@ class Engine:
           pg.display.gl_set_attribute(pg.GL_CONTEXT_PROFILE_MASK, pg.GL_CONTEXT_PROFILE_CORE)
 
           # Cria o contexto OpenGL
-          pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
+          self.screen = pg.display.set_mode(self.WIN_SIZE, flags=pg.OPENGL | pg.DOUBLEBUF)
+          
 
           # Detecta e usa o contexto OpenGL escolhido
           self.ctx = mgl.create_context()
@@ -38,6 +49,7 @@ class Engine:
 
           # Coisas
           self.scene      = Cube(self)
+          self.ui         = UI()
 
      def check_events(self):
           for event in pg.event.get():
@@ -52,6 +64,7 @@ class Engine:
      def render(self):
           self.ctx.clear(color=(0, 0, 0))
           self.scene.render()
+          self.ui.render(self.screen)
           pg.display.flip()
 
      def run(self):
@@ -62,7 +75,12 @@ class Engine:
                self.clock.tick(60)
                self.delta_time = self.clock.tick(60)
 
+
+
 if __name__ == '__main__':
      game = Engine()
      game.run()
+
+
+
 
