@@ -50,6 +50,12 @@ class Camera:
      def move(self):
           velocity = SPEED * self.game.delta_time
           keys = pg.key.get_pressed()
+          mleft, middle, mright = pg.mouse.get_pressed()
+
+          if mleft:
+               print("mouse left")
+          if mright:
+               print("mouse right")
 
           if keys[pg.K_w]:
                self.position += self.forward * velocity

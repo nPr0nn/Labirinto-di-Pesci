@@ -1,6 +1,5 @@
 from tabnanny import verbose
 
-
 class BaseVBO:
     def __init__(self, ctx):
         self.ctx = ctx
@@ -14,7 +13,7 @@ class BaseVBO:
         vertex_data = self.get_vertex_data()
         vbo = self.ctx.buffer(vertex_data)
         return vbo
-    
+
     def destroy(self):
         self.vbo.release()
 

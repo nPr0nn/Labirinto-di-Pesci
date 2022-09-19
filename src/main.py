@@ -14,7 +14,6 @@ from ui import UI
 from ilumination import Phong_Light
 
 class Engine:
-
      resource_dir = (Path(__file__) / '../../resources').absolute()
 
      def __init__(self, win_size=(1080, 640)):
@@ -35,7 +34,7 @@ class Engine:
 
           # Configurações do mouse
           pg.event.set_grab(True)
-          pg.mouse.set_visible(False)
+          # pg.mouse.set_visible(False)
 
           # Detecta e usa o contexto OpenGL escolhido
           self.ctx = mgl.create_context()
@@ -54,8 +53,8 @@ class Engine:
           self.camera      = Camera(self)
 
           # Coisas
-          self.scene      = Cube(self)
-          self.ui         = UI()
+          self.scene       = Cube(self)
+          self.ui          = UI()
           self.scene       = Cube(self)
 
      # Checa os eventos do pygame, em especial verifica se a janela foi fechada e destroi os objetos
@@ -88,11 +87,7 @@ class Engine:
                self.delta_time = self.clock.tick(60)
 
 
-
 if __name__ == '__main__':
      game = Engine()
      game.run()
-
-
-
 
