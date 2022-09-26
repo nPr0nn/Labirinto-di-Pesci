@@ -30,9 +30,9 @@ func _physics_process(delta):
 	if key_down:
 		move_direction.y = speed
 	if key_right:
-		move_direction.x = -speed
-	if key_left:
 		move_direction.x = speed
+	if key_left:
+		move_direction.x = -speed
 		
 	move_and_collide(move_direction)
 	
