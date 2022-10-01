@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Peixe.gd" type="Script" id=1]
-[ext_resource path="res://peixa.png" type="Texture" id=2]
-[ext_resource path="res://fundo.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Peixe.gd" type="Script" id=1]
+[ext_resource path="res://Assets/peixa.png" type="Texture" id=2]
+[ext_resource path="res://Assets/fundo.png" type="Texture" id=3]
 
 [node name="Cena_principal" type="Node2D"]
 position = Vector2( 322, 279 )
