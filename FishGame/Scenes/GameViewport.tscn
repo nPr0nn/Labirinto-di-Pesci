@@ -6,7 +6,6 @@
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
-shader_param/camera_offset = Vector2( 0, 0 )
 
 [sub_resource type="World" id=1]
 
