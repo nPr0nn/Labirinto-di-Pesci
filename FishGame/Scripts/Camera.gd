@@ -6,7 +6,6 @@ export (NodePath) onready var viewport_container = get_node(viewport_container)
 onready var real_camera_position     = global_position
 
 func _process(delta):
-	print("oi")
 	var mouse_position  = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + player.global_position
 	
 	var calculated_camera_position = lerp(player.global_position, mouse_position, 0.7)

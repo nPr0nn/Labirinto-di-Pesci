@@ -6,7 +6,7 @@ var velocity = Vector2(0,0)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var aceleration = 0.05
+var aceleration = 0.2
 var atrito = 1-0.03
 var click
 var speed = 0

@@ -15,7 +15,6 @@ position = Vector2( 182, -667 )
 scale = Vector2( 1.61388, 1.5875 )
 texture = ExtResource( 3 )
 
-[node name="Peixe" parent="." instance=ExtResource( 1 )]
 [node name="Peixe" type="KinematicBody2D" parent="."]
 position = Vector2( -241, -307 )
 script = ExtResource( 1 )

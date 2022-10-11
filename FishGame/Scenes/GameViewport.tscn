@@ -30,7 +30,6 @@ render_target_update_mode = 3
 
 [node name="Cena_principal" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
 
-[editable path="ViewportContainer/Viewport/Cena_principal"]
 [node name="Camera2D" parent="ViewportContainer/Viewport/Cena_principal/Camera" index="0"]
 current = true
 viewport_container = NodePath("../../../..")
