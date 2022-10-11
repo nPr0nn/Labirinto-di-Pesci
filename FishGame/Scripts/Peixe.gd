@@ -10,8 +10,9 @@ var aceleration = 0.2
 var atrito = 1-0.03
 var click
 var speed = 0
-var maxSpeed = 7
-var gravity = Vector2(0, -0.05)
+var maxSpeed = 3
+var gravity = Vector2(0, 0.005)
+var useMouse = true
 
 var target = Vector2(0, 0)	
 var mouse_position
@@ -23,19 +24,31 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#inicio codigo geral
-	draw_line(position, velocity, 1)
-	look_at(global_position+velocity)
-	#look_at((position))
-# inicio codigo lucas
-	mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
+	if useMouse:
+		mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
 
-	if mouse_position.x < position.x:
-		$Sprite.flip_h()
-		
-	look_at(mouse_position)
+		if mouse_position.x < position.x:	#pra q isso server?
+			$Sprite.flip_h()
+		look_at(mouse_position)
+	else:
+		look_at(global_position+velocity)
+	
+
+	
 	
 func _physics_process(delta):
+	if Input.is_mouse_button_pressed(1):
+		useMouse = true
+		target = mouse_position
+		speed += aceleration
+		
+		#velocidade eh o produto da dir pelo modulo, apenas atualiza ao clicar
+		velocity = ( global_position.direction_to(target).normalized() )* speed
+	
+	speed *= atrito
+	if speed > maxSpeed:
+		speed = maxSpeed
+	
 	click = false
 	
 #codigo geral
@@ -58,23 +71,12 @@ func _physics_process(delta):
 	if not click:
 		velocity.x *= atrito
 		velocity.y *= atrito
+	else:
+		useMouse = false
 	
+	velocity += gravity
 	move_and_collide(velocity)
-#codigo do lucas
-	if Input.is_mouse_button_pressed(1): 
-		target = mouse_position
-		speed += aceleration
-		velocity = ( global_position.direction_to(target).normalized() )* speed
 	
-	speed *= atrito
-	if speed > maxSpeed:
-		speed = maxSpeed
-	
-	print(speed)
-	
-	velocity = velocity.normalized()*speed - gravity
-	
-	move_and_collide(velocity)
 
 
 	
