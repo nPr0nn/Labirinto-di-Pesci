@@ -13,8 +13,9 @@ var speed = 0
 var maxSpeed = 3
 var gravity = Vector2(0, 0.005)
 var useMouse = true
+var onWater = true
 
-var target = Vector2(0, 0)	
+var target = Vector2(0, 0)
 var mouse_position
 
 # Called when the node enters the scene tree for the first time.
@@ -26,9 +27,6 @@ func _ready():
 func _process(delta):
 	if useMouse:
 		mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
-
-		if mouse_position.x < position.x:	#pra q isso server?
-			$Sprite.flip_h()
 		look_at(mouse_position)
 	else:
 		look_at(global_position+velocity)
@@ -37,7 +35,8 @@ func _process(delta):
 	
 	
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(1):
+	if Input.is_mouse_button_pressed(1) and onWater:
+		
 		useMouse = true
 		target = mouse_position
 		speed += aceleration
@@ -58,16 +57,20 @@ func _physics_process(delta):
 	var key_right = Input.is_action_pressed("ui_right")
 	if key_up and velocity.y > -maxSpeed:
 		click = true
-		velocity.y -= aceleration
+		if onWater:
+			velocity.y -= aceleration
 	if key_down and velocity.y < maxSpeed:
 		click = true
-		velocity.y += aceleration
+		if onWater:
+			velocity.y += aceleration
 	if key_right and velocity.x < maxSpeed:
 		click = true
-		velocity.x += aceleration
+		if onWater:
+			velocity.x += aceleration
 	if key_left and velocity.x > -maxSpeed:
 		click = true
-		velocity.x -= aceleration
+		if onWater:
+			velocity.x -= aceleration
 	if not click:
 		velocity.x *= atrito
 		velocity.y *= atrito
@@ -80,3 +83,18 @@ func _physics_process(delta):
 
 
 	
+
+
+#func _on_area_mar_body_entered(body):
+#	gravity = Vector2(0, 0.005)
+#	onWater=true
+
+
+func _on_area_mar_body_exited(body):
+	gravity = Vector2(0, 0.05)
+	onWater=false
+
+
+func _on_area_mar_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+	gravity = Vector2(0, 0.005)
+	onWater=true

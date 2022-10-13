@@ -5,20 +5,13 @@ export (NodePath) onready var player = get_node(player)
 export (NodePath) onready var viewport_container = get_node(viewport_container)
 onready var real_camera_position     = global_position
 
-func trunc(x, a, b):
-	if x < a:
-		return a
-	if x > b:
-		return b
-	return x
-	
 func _process(delta):
 	var mouse_position_on_screen = (get_viewport().get_mouse_position()/Game.window_scale)
-	mouse_position_on_screen.x = trunc(mouse_position_on_screen.x, 64, 192)
-	mouse_position_on_screen.y = trunc(mouse_position_on_screen.y, 36, 108)
+	mouse_position_on_screen.x = clamp(mouse_position_on_screen.x, 64, 192)
+	mouse_position_on_screen.y = clamp(mouse_position_on_screen.y, 36, 108)
 	var mouse_position  = mouse_position_on_screen - Game.size/2 + player.global_position
 	
-	print(mouse_position_on_screen)
+#	print(mouse_position_on_screen)
 	
 	
 	var calculated_camera_position = lerp(player.global_position, mouse_position, 0.7)
