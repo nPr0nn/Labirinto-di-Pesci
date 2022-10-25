@@ -25,6 +25,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	if useMouse:
 		mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
 		look_at(mouse_position)
@@ -32,15 +33,12 @@ func _process(delta):
 		look_at(global_position+velocity)
 	
 
-	
-	
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(1) and onWater:
-		
+	
+	if Input.is_mouse_button_pressed(1) and onWater:		
 		useMouse = true
 		target = mouse_position
 		speed += aceleration
-		
 		#velocidade eh o produto da dir pelo modulo, apenas atualiza ao clicar
 		velocity = ( global_position.direction_to(target).normalized() )* speed
 	
@@ -80,21 +78,14 @@ func _physics_process(delta):
 	velocity += gravity
 	move_and_collide(velocity)
 	
-
-
-	
-
-
 #func _on_area_mar_body_entered(body):
 #	gravity = Vector2(0, 0.005)
 #	onWater=true
 
-
-func _on_area_mar_body_exited(body):
-	gravity = Vector2(0, 0.05)
-	onWater=false
-
-
-func _on_area_mar_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
+func _on_Water_body_entered(body):
 	gravity = Vector2(0, 0.005)
 	onWater=true
+
+func _on_Water_body_exited(body):
+	gravity = Vector2(0, 0.05)
+	onWater=false

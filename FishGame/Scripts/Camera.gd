@@ -11,8 +11,7 @@ func _process(delta):
 	mouse_position_on_screen.y = clamp(mouse_position_on_screen.y, 36, 108)
 	var mouse_position  = mouse_position_on_screen - Game.size/2 + player.global_position
 	
-#	print(mouse_position_on_screen)
-	
+	print(player.position)
 	
 	var calculated_camera_position = lerp(player.global_position, mouse_position, 0.7)
 	real_camera_position = lerp(real_camera_position, calculated_camera_position, delta*5)
