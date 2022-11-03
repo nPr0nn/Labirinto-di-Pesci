@@ -10,11 +10,14 @@ Assim, os padrões utilizados no projeto foram: *Camadas*, *Mediador*, *Abstract
 
 
 ### Nível 1  
-No primeiro nível do diagrama C4 observamos o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos a aplicação.   
-![Nível 1](img/arquitetrua-1-Level.png)  
+No primeiro nível do diagrama C4 observamos o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos a aplicação.
+![Nível 1](img/arquitetrua-1-Level.png) 
+Nesse diagrama é possível ver a existencia de um componente chamado game system. Esse sistema representa todo o processo realizado pelo jogo.
 ### Nível 2
-Seguindo para o nível 2 mostra-se o diagrama de conteiners da aplicação. Perceba que aqui já está sendo considerado o estilo de arquitetura princiapal seguido pala equipe, esse sendo arquitetura em camadas. aqui o sistema tem como sua base
+Seguindo para o nível 2 mostra-se o diagrama de conteiners da aplicação. Perceba que aqui já está sendo considerado o estilo de arquitetura princiapal seguido pala equipe, esse sendo arquitetura em camadas.
 ![Nível 2](img/arquitetrua-2-Level.png)  
+Nesse nível é possível perceber a existência de quatro outros componentes: O primeiro é a interface com o usuário, em que serão coletadas as entradas pelo menu, mouse ou teclado. Esses dados serão organizados e repassados para os componentes Game Manager e Scene Manager. Game Manager deve apresentar o jogo e controlar seu estado de forma mais geral, enquanto Scene Manager consistirá dos objetos e estados das cenas do jogo. Ambas classes trocam dados com Game Object, uma abstração de objetos para as entidades do jogo. Esse último componente recebe dados dos datasets de levels e assets.
+
 ### Nível 3
 Para o nível 3 o diagrama apresenta os componentes da aplicação mais detalhadamente, apresentando as interações mais próximas entre os containers. As interações são bem complexas então as imagens explicam melhor por si só.
 Vale a pena ressaltar, que as posições dos componentes apresentam o formato de camadas, sendo elas 4: Do nível mais próximo ao usuário até o nível mais distante. 
