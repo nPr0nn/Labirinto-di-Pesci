@@ -44,9 +44,10 @@ Esse último container recebe dados dos datasets de levels e assets.
 
 ### Nível 3
 
-Por fim, para o nível 3 o diagrama apresenta os componentes da aplicação mais detalhadamente, com uma descrição de cada um e
-uma descrição de cada interação entre dois quaisquer componentes. As interações são bem complexas então as imagens explicam melhor por si só.
-Vale a pena ressaltar também, que as posições verticais dos componentes representam o formato de camadas, sendo elas 4, indo 
+Por fim, para o nível 3, o diagrama quebra os containers em componentes da aplicação e os 
+apresenta mais detalhadamente, com uma descrição textual da responsabilidade de cada um e da interação entre dois quaisquer componentes. 
+As interações são bem complexas então as imagens e os textos nela explicam melhor por si só. Vale a pena ressaltar também, que as posições verticais dos componentes representam o formato de camadas, sendo elas 4, indo 
 do nível mais próximo ao usuário até o nível mais distante.
 
 ![Nível 3](img/arquitetrua-3-Level.png)
+
