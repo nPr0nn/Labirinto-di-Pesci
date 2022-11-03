@@ -21,20 +21,19 @@ e o sistema do jogo. Também é possível perceber que não há interação do s
 a aplicação, visto que o jogo foi desenvolvido dentro de uma Game Engine como o Godot, e portanto o sistema do Godot atua como uma tecnologia para desenvolvimento do software.
 Nesse diagrama é possível ver a existencia de um *Software System* chamado Game System, este representa todo o processo realizado pelo jogo.
 
-<p align="center">
-<!--![Nível 1](img/arquitetrua-1-Level.png) -->
-  <img src="img/arquitetrua-1-Level.png">
-</p>
+![Nível 1](img/arquitetrua-1-Level.png) 
 
 ### Nível 2
 
 Seguindo para o nível 2 é possível ver o diagrama de conteiners da aplicação. Perceba que aqui já está sendo considerado o estilo de arquitetura principal seguido pela equipe, esse sendo arquitetura em camadas.
-Cada camada é composta por game objects e suas interações, esses objetos podem receber, das duas databases, assets e informações necessarias para a sua construção, eles podem ser leveis, inimigos, mapas, items, etc...
 Na camada que tem contato com o player (usuário) está a User Interface (UI) que lida com as interações do player
 referentes ao menu e suas configurações, permitindo o usuário selecionar suas preferências para customizar o jogo as suas necessidades,
 e também referentes aos inputs de controles, teclados e mouses que podem ser usados no jogo. Logo abaixo
-existem o Scene manager e o Game Manager que se responsabilizam respectivamente pelo o controle individual de cenas e objetos detro desta e 
-pela renderização do jogo na camera e progressão da história. Os dois passam informações entre si para modificar cenas e variaveis constantes entre cenas.
+existem o Scene manager e o Game Manager que se responsabilizam respectivamente pela organização posicional de cenas e objetos e 
+pela renderização do jogo na camera e progressão da história, os dois containers passam informações entre si para modificar cenas e variaveis constantes entre elas. 
+Abaixo está a camada dos Game Objects e suas interações, esses objetos podem receber, das duas databases, assets e 
+informações necessarias para a sua construção, eles compõem as cenas dos jogo e podem ser desde leveis, mapas e items até o personagem do player e inimigos.
+
 
 ![Nível 2](img/arquitetrua-2-Level.png)  
 
