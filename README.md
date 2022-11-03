@@ -4,9 +4,16 @@ Projeto da disciplina de engenharia de software (MC426) do segundo semestre de 2
 Jogo 2D de puzzle e exploração sobre um peixe de estimação de cientistas do mal, feito com a Godot engine.
 
 
-## Arquitetura
-A arquitetura se baseia no estilo de quatro camadas do nível mais próximo ao usuário até o nível mais distante dele. Dessa forma, torna -se necessário a utilização do estilo mediador para realizar a interface dos dados entre componentes, de forma a diminuir o conteúdo transmitido entre elas. Além disso, toda a arquitetura é baseada em orientação de objetos para ser construída. Para as partes mais profundas da arquitetura, também foi necessário a utilização de uma fábrica abstrata para poder realizar abstrações de objetos do jogo.
-Assim, os estilos utilizados no projeto foram: *Camadas*, *Mediador*, *Abstract factory* e *Orientação à objetos*.
+## Estilos Arquiteturais
+
+A arquitetura decidida tem como base o estilo de camadas (Layering), e para sua implementação foi adicionado aspectos tanto do estilo
+mediador, no que tange a interface entre os arquivos de dados guardados em um diretório de database e as componentes do jogo, quanto
+do estilo de Objetos na estrutura das componentes principais do jogo, como entidades que interagem com o jogador, mas também se fez necessário
+a utilização de uma fábrica abstrata para poder realizar abstrações de objetos do jogo. Assim, os estilos utilizados no projeto foram: *Camadas*, *Mediador*, *Orientação à objetos* e *Abstract Factory*.
+
+
+## Diagrama de Componentes
+Para apresentação da arquitetura utilizada foi usado o modelo C4.
 
 ### Nível 1  
 No primeiro nível do diagrama C4 observamos o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos a aplicação.
