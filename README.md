@@ -23,7 +23,7 @@ Nesse diagrama é possível ver a existencia de um *Software System* chamado Gam
 
 <p align="center">
 <!--![Nível 1](img/arquitetrua-1-Level.png) -->
-  <img width="460" height="300" src="img/arquitetrua-1-Level.png">
+  <img src="img/arquitetrua-1-Level.png">
 </p>
 
 ### Nível 2
