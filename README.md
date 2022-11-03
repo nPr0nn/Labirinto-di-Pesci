@@ -34,6 +34,7 @@ pela renderização do jogo na camera e progressão da história, os dois contai
 Abaixo está a camada dos Game Objects e suas interações, esses objetos podem receber, das duas databases, assets e 
 informações necessarias para a sua construção, eles compõem as cenas dos jogo e podem ser desde leveis, mapas e items até o personagem do player e inimigos.
 \
+\
 De forma resumida, a UI coleta entradas pelo menu e controles e repassa para o Game Manager e o Scene Manager.
 O Game Manager apresenta o jogo e registra seu estado, enquanto Scene Manager organiza os objetos do jogo na cenas que está sendo apresentada ao player. 
 Ambas classes trocam dados com Game Object, uma abstração de objetos para as entidades do jogo. 
@@ -42,6 +43,10 @@ Esse último container recebe dados dos datasets de levels e assets.
 ![Nível 2](img/arquitetrua-2-Level.png)
 
 ### Nível 3
-Para o nível 3 o diagrama apresenta os componentes da aplicação mais detalhadamente, apresentando as interações mais próximas entre os containers. As interações são bem complexas então as imagens explicam melhor por si só.
-Vale a pena ressaltar, que as posições dos componentes apresentam o formato de camadas, sendo elas 4: Do nível mais próximo ao usuário até o nível mais distante. 
+
+Por fim, para o nível 3 o diagrama apresenta os componentes da aplicação mais detalhadamente, com uma descrição de cada um e
+uma descrição de cada interação entre dois quaisquer componentes. As interações são bem complexas então as imagens explicam melhor por si só.
+Vale a pena ressaltar também, que as posições verticais dos componentes representam o formato de camadas, sendo elas 4, indo 
+do nível mais próximo ao usuário até o nível mais distante.
+
 ![Nível 3](img/arquitetrua-3-Level.png)
