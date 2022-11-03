@@ -13,20 +13,28 @@ a utilização de uma fábrica abstrata para poder realizar abstrações de obje
 
 
 ## Diagrama de Componentes
-Para apresentação da arquitetura utilizada foi usado o modelo C4.
+Para melhor apresentação da arquitetura utilizada foi usado o modelo C4.
 
 ### Nível 1  
-No primeiro nível do diagrama C4 observamos o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos a aplicação.
+No primeiro nível do diagrama é possível observar o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador 
+e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos 
+a aplicação, visto que o jogo foi desenvolvido dentro de uma Game Engine como o Godot, e portanto o sistema do Godot atua como uma tecnologia para desenvolvimento do software.
+Nesse diagrama é possível ver a existencia de um *Software System* chamado Game System, este representa todo o processo realizado pelo jogo.
 
-![Nível 1](img/arquitetrua-1-Level.png) 
+<p align="center">
+<!--![Nível 1](img/arquitetrua-1-Level.png) -->
+  <img width="460" height="300" src="img/arquitetrua-1-Level.png">
+</p>
 
-Nesse diagrama é possível ver a existencia de um componente chamado game system. Esse sistema representa todo o processo realizado pelo jogo.
 ### Nível 2
 
-Seguindo para o nível 2 mostra-se o diagrama de conteiners da aplicação. Perceba que aqui já está sendo considerado o estilo de arquitetura principal seguido pela equipe, esse sendo arquitetura em camadas.  
-Aqui o sistema tem como sua base game objects, esses recebem assets das duas databases necessarias para a construção dos objetos do jogo (Levels, inimigos, mapas e objetos estaticos).  
-Na camada superior a essa existem o scene manager e o game manager esses se responsabilizam respectivamente para o controle individual de cenas e objetos detro desta cena, enquanto isso o game maneger é responsabilizado pela progressão do jogo. Os dois passam informações entre si para modificar cenas e variaveis constantes entre cenas.  
-A ultima camada é a UI que o jogador(user) irá iteragir consistindo do controle do personagem do jogador e menus do jogo, este interage com as cenas de forma a controlar opções de preferencia do jogador pelo menu e interage com o game maneger mandando os inputs necessarios para o personagem do jogador.
+Seguindo para o nível 2 é possível ver o diagrama de conteiners da aplicação. Perceba que aqui já está sendo considerado o estilo de arquitetura principal seguido pela equipe, esse sendo arquitetura em camadas.
+Cada camada é composta por game objects e suas interações, esses objetos podem receber, das duas databases, assets e informações necessarias para a sua construção, eles podem ser leveis, inimigos, mapas, items, etc...
+Na camada que tem contato com o player (usuário) está a User Interface (UI) que lida com as interações do player
+referentes ao menu e suas configurações, permitindo o usuário selecionar suas preferências para customizar o jogo as suas necessidades,
+e também referentes aos inputs de controles, teclados e mouses que podem ser usados no jogo. Logo abaixo
+existem o Scene manager e o Game Manager que se responsabilizam respectivamente pelo o controle individual de cenas e objetos detro desta e 
+pela renderização do jogo na camera e progressão da história. Os dois passam informações entre si para modificar cenas e variaveis constantes entre cenas.
 
 ![Nível 2](img/arquitetrua-2-Level.png)  
 
