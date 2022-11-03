@@ -33,11 +33,13 @@ existem o Scene manager e o Game Manager que se responsabilizam respectivamente 
 pela renderização do jogo na camera e progressão da história, os dois containers passam informações entre si para modificar cenas e variaveis constantes entre elas. 
 Abaixo está a camada dos Game Objects e suas interações, esses objetos podem receber, das duas databases, assets e 
 informações necessarias para a sua construção, eles compõem as cenas dos jogo e podem ser desde leveis, mapas e items até o personagem do player e inimigos.
+\
+De forma resumida, a UI coleta entradas pelo menu e controles e repassa para o Game Manager e o Scene Manager.
+O Game Manager apresenta o jogo e registra seu estado, enquanto Scene Manager organiza os objetos do jogo na cenas que está sendo apresentada ao player. 
+Ambas classes trocam dados com Game Object, uma abstração de objetos para as entidades do jogo. 
+Esse último container recebe dados dos datasets de levels e assets.
 
-
-![Nível 2](img/arquitetrua-2-Level.png)  
-
-Nesse nível é possível perceber a existência de quatro outros componentes: O primeiro é a interface com o usuário, em que serão coletadas as entradas pelo menu, mouse ou teclado. Esses dados serão organizados e repassados para os componentes Game Manager e Scene Manager. Game Manager deve apresentar o jogo e controlar seu estado de forma mais geral, enquanto Scene Manager consistirá dos objetos e estados das cenas do jogo. Ambas classes trocam dados com Game Object, uma abstração de objetos para as entidades do jogo. Esse último componente recebe dados dos datasets de levels e assets.
+![Nível 2](img/arquitetrua-2-Level.png)
 
 ### Nível 3
 Para o nível 3 o diagrama apresenta os componentes da aplicação mais detalhadamente, apresentando as interações mais próximas entre os containers. As interações são bem complexas então as imagens explicam melhor por si só.
