@@ -1,17 +1,8 @@
-extends KinematicBody2D
+extends "res://Scripts/ObjectFactory.gd"
 onready var Game = get_node("/root/Singleton")
 
-var velocity = Vector2(0,0)
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-var aceleration = 0.2
-var atrito = 1-0.03
 var click
-var speed = 0
-var maxSpeed = 3
-var gravity = Vector2(0, 0.005)
 var useMouse = true
 var onWater = true
 
