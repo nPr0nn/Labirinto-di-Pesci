@@ -85,11 +85,12 @@ func _physics_process(delta):
 #	gravity = Vector2(0, 0.005)
 #	onWater=true
 
+func alterarGravidade(agua, gravidade):
+	gravity = gravidade
+	onWater = agua
+
 func _on_Water_body_entered(body):
-	gravity = Vector2(0, 0.001)
-	onWater=true
+	alterarGravidade(true, Vector2(0, 0.005))
 
 func _on_Water_body_exited(body):
-	velocity *= 2.7
-	gravity = Vector2(0, 0.15)
-	onWater=false
+	alterarGravidade(false, Vector2(0, 0.05))
