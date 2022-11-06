@@ -1,17 +1,21 @@
-extends KinematicBody2D	# configurar para funcionar com tiles
+extends Node2D
 
-export var velocity = Vector2(0,0)
-export var aceleration = 0.2
-export var atrito = 1-0.03
-export var speed = 0
-export var maxSpeed = 4.5
-export var gravity = Vector2(0, 0.005)
+var models = {"simpleEnemy": preload("res://Scenes/SimpleEnemy.tscn"),"box": preload("res://Scenes/Caixa.tscn")}
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for i in range(21):
+		addObject("box",-187,i*64-990)
+		addObject("box",901,i*64-990)
+		
+	
+	for i in range(17):
+		addObject("box",-187+i*64,286)
 
+func addObject(type,x,y):
+	var enemy = models[type].instance()
+	enemy.global_position = Vector2(x,y)
+	add_child(enemy)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_pressed("spawnEnemy"):
+		addObject("simpleEnemy",0,0)
