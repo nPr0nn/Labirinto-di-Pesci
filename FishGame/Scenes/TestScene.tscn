@@ -4,13 +4,13 @@
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/FishPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/aquarium_wall.png" type="Texture" id=4]
-[ext_resource path="res://Assets/FishPlayer/body_sprite.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Enemy1/body_sprite.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 514.75, 497.75 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 76, 32 )
+extents = Vector2( 30, 32 )
 
 [sub_resource type="PhysicsMaterial" id=5]
 bounce = 0.14
@@ -53,19 +53,21 @@ texture = ExtResource( 4 )
 shape = SubResource( 3 )
 
 [node name="Block2" type="StaticBody2D" parent="."]
-position = Vector2( -24, -385 )
+position = Vector2( 46, -386 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Sprite" type="Sprite" parent="Block2"]
+position = Vector2( -36, 1 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Block2"]
+position = Vector2( -36, 1 )
 shape = SubResource( 3 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2( -115, -576 )
+position = Vector2( -94, -547 )
 mass = 1222.15
 physics_material_override = SubResource( 5 )
 gravity_scale = 0.5

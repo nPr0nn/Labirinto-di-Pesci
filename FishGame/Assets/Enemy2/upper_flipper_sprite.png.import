@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/aquarium_wall.png-aacf4102362c6c63d9216fd34157a597.stex"
+path="res://.import/upper_flipper_sprite.png-ff3c6ebbf6f0eec903887e336579381d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/aquarium_wall.png"
-dest_files=[ "res://.import/aquarium_wall.png-aacf4102362c6c63d9216fd34157a597.stex" ]
+source_file="res://Assets/Enemy2/upper_flipper_sprite.png"
+dest_files=[ "res://.import/upper_flipper_sprite.png-ff3c6ebbf6f0eec903887e336579381d.stex" ]
 
 [params]
 
