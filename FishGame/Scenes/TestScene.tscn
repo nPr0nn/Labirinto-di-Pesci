@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/fundo.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/ObjectFactory.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 514.75, 506.25 )
@@ -30,5 +31,7 @@ shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -246, -308 )
+
+[node name="objectFactory" parent="." instance=ExtResource( 4 )]
 
 [editable path="Camera"]

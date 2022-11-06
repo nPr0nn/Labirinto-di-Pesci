@@ -1,22 +1,18 @@
 extends Node2D
 
-var = enemyModel = preload("rea://Scenes/Enemy")
-
-var objetos = Vector() #vetor de kinematic bodies
+var models = {"simple": preload("res://Scenes/SimpleEnemy.tscn")}
 
 
 func _ready():
 	pass # Replace with function body.
 
-func removeObject(posElementoVetor):
-	Vector[posElementoVetor].quere.free()
-
-
-func addEnemy(x,y):
-	var enemy = enemyModel.instance()
-	tiro.set_global_pos(x,y)
-	objetos.append(enemy)
-	add_child(main)
+func addEnemy(type,x,y):
+	print("Quero spawnar")
+	var enemy = models[type].instance()
+	enemy.set_global_pos(x,y)
+	add_child(enemy)
 
 func _process(delta):
-	pass
+	if Input.is_action_pressed("spawnEnemy"):
+		addEnemy("simple",100,100)
+	
