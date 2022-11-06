@@ -1,24 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/spritesheet_enemies.png" type="Texture" id=1]
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends KinematicBody2D
-
-
-var gravity = Vector2(0, 0.005)
-var velocity = Vector2(0,0)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	velocity += gravity
-	move_and_collide(velocity)
-"
+[ext_resource path="res://Assets/Enemy1/body_sprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/simpleEnemy.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0333
@@ -26,10 +9,11 @@ radius = 15.0333
 [node name="simpleEnemy" type="Node2D"]
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-script = SubResource( 2 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 1 )
+offset = Vector2( -10, -5 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 61, 50 )
 

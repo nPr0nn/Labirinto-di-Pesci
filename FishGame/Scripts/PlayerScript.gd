@@ -1,10 +1,16 @@
-extends "res://Scripts/ObjectFactory.gd"
+extends KinematicBody2D
 onready var Game = get_node("/root/Singleton")
 
 var click
 var useMouse = true
 var onWater = true
 var total_time = 0
+var velocity = Vector2(0,0)
+var aceleration = 0.2
+var atrito = 1-0.03
+var speed = 0
+var maxSpeed = 4.5
+var gravity = Vector2(0, 0.005)
 
 var target = Vector2(0, 0)
 var mouse_position

@@ -1,20 +1,21 @@
 extends Node2D
 
-var models = {"simple": preload("res://Scenes/SimpleEnemy.tscn")}
-var spawnar = true
+var models = {"simpleEnemy": preload("res://Scenes/SimpleEnemy.tscn"),"box": preload("res://Scenes/Caixa.tscn")}
 
 func _ready():
-	pass # Replace with function body.
+	for i in range(21):
+		addObject("box",-187,i*64-990)
+		addObject("box",901,i*64-990)
+		
+	
+	for i in range(17):
+		addObject("box",-187+i*64,286)
 
-func addEnemy(type,x,y):
-	print("Quero spawnar")
+func addObject(type,x,y):
 	var enemy = models[type].instance()
-	print(enemy.global_position)
+	enemy.global_position = Vector2(x,y)
 	add_child(enemy)
 
 func _process(delta):
-	if Input.is_action_pressed("spawEnemy"):
-		if spawnar == true:
-			print("printar")
-			spawnar = false
-			addEnemy("simple",100,100)
+	if Input.is_action_pressed("spawnEnemy"):
+		addObject("simpleEnemy",0,0)
