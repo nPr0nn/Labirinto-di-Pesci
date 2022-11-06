@@ -1,10 +1,10 @@
 extends "res://Scripts/ObjectFactory.gd"
 onready var Game = get_node("/root/Singleton")
 
-
 var click
 var useMouse = true
 var onWater = true
+var total_time = 0
 
 var target = Vector2(0, 0)
 var mouse_position
@@ -12,21 +12,32 @@ var mouse_position
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)
-	#look_at((position))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	if useMouse:
 		mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
 		look_at(mouse_position)
 	else:
 		look_at(global_position+velocity)
+
 	
+func _draw():
+	pass
+#	draw_line(position, global_position + velocity, Color(255,0,0), 5)
 
 func _physics_process(delta):
+	total_time += delta
+	$Tail.rotate(sin(total_time*4)*0.03)	
+	$"Upper Flipper".rotate(sin(total_time*2)*0.015)
+	$Flipper.rotate(sin(total_time*2)*0.01)
 	
-	if Input.is_mouse_button_pressed(1) and onWater:		
+	$Mohawk.rotate(sin(total_time*2)*0.015)
+	$Mohawk2.rotate(sin(total_time*3)*0.015)
+	$Mohawk3.rotate(sin(total_time*4)*0.015)
+	
+	
+	if Input.is_mouse_button_pressed(1) and onWater:
 		useMouse = true
 		target = mouse_position
 		speed += aceleration
@@ -44,6 +55,7 @@ func _physics_process(delta):
 	var key_down = Input.is_action_pressed("ui_down")
 	var key_left = Input.is_action_pressed("ui_left")
 	var key_right = Input.is_action_pressed("ui_right")
+	
 	if key_up and velocity.y > -maxSpeed:
 		click = true
 		if onWater:
@@ -74,9 +86,10 @@ func _physics_process(delta):
 #	onWater=true
 
 func _on_Water_body_entered(body):
-	gravity = Vector2(0, 0.005)
+	gravity = Vector2(0, 0.001)
 	onWater=true
 
 func _on_Water_body_exited(body):
-	gravity = Vector2(0, 0.05)
+	velocity *= 2.7
+	gravity = Vector2(0, 0.15)
 	onWater=false

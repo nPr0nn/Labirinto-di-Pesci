@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="ClothSimulation" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -1, 2 )
+polygon = PoolVector2Array( 273, 195, 406, 209, 450, 290, 400, 342, 255, 330, 193, 264, 247, 165 )
