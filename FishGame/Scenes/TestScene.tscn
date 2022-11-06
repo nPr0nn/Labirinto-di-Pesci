@@ -32,6 +32,10 @@ shape = SubResource( 2 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( -246, -308 )
 
+[node name="PlayerBody" parent="Player" index="0" groups=["Player"]]
+
 [node name="objectFactory" parent="." instance=ExtResource( 4 )]
+position = Vector2( -201, -317 )
 
 [editable path="Camera"]
+[editable path="Player"]
