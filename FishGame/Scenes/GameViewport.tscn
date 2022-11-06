@@ -17,8 +17,8 @@ script = ExtResource( 3 )
 material = SubResource( 3 )
 margin_left = -4.0
 margin_top = -4.0
-margin_right = 256.0
-margin_bottom = 144.0
+margin_right = 254.0
+margin_bottom = 142.0
 rect_scale = Vector2( 4, 4 )
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
@@ -30,8 +30,12 @@ render_target_update_mode = 3
 
 [node name="TestScene" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
 
+[node name="Camera" parent="ViewportContainer/Viewport/TestScene" index="0"]
+scale = Vector2( 6.456, 3.174 )
+
 [node name="Camera2D" parent="ViewportContainer/Viewport/TestScene/Camera" index="0"]
 current = true
+zoom = Vector2( 1.5, 1.5 )
 player = NodePath("../../Player/PlayerBody")
 viewport_container = NodePath("../../../..")
 
