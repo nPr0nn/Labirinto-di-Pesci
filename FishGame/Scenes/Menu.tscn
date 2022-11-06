@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Menu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/FishPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Fonts/04B_30__.TTF" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 3 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.101961, 0.109804, 0.423529, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.517
+anchor_top = 0.5
+anchor_right = 0.517
+anchor_bottom = 0.5
+margin_left = -138.408
+margin_top = 4.0
+margin_right = 135.592
+margin_bottom = 86.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+margin_right = 274.0
+margin_bottom = 39.0
+focus_neighbour_top = NodePath("../Quit")
+custom_fonts/font = SubResource( 2 )
+text = "Inicia"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+visible = false
+margin_top = 43.0
+margin_right = 137.0
+margin_bottom = 63.0
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 43.0
+margin_right = 274.0
+margin_bottom = 82.0
+custom_fonts/font = SubResource( 3 )
+text = "Sair"
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 354, 233 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 123.0
+margin_top = 146.0
+margin_right = 938.0
+margin_bottom = 211.0
+custom_fonts/font = SubResource( 1 )
+text = "The Punk Fish!!"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Enemy1/body_sprite.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/simpleEnemy.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 26.0
+
+[node name="simpleEnemy" type="Node2D"]
+
+[node name="Fish Enemy Body" type="RigidBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="Body" type="Sprite" parent="Fish Enemy Body"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+offset = Vector2( -10, -5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 61, 50 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish Enemy Body"]
+position = Vector2( 2, 0 )
+rotation = 1.5708
+shape = SubResource( 1 )
