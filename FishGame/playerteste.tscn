@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Peixe.gd" type="Script" id=1]
+[ext_resource path="res://peixa.png" type="Texture" id=2]
+[ext_resource path="res://fundo.png" type="Texture" id=3]
+
+[node name="Cena_principal" type="Node2D"]
+position = Vector2( 322, 279 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Mar" type="Sprite" parent="."]
+position = Vector2( 192, -184 )
+scale = Vector2( 1.61388, 1.5875 )
+texture = ExtResource( 3 )
+
+[node name="Peixe" type="KinematicBody2D" parent="."]
+position = Vector2( 130, -119 )
+script = ExtResource( 1 )
+
+[node name="Cara_peixe" type="Sprite" parent="Peixe"]
+texture = ExtResource( 2 )
+
+[node name="Colisao_peixe" type="CollisionPolygon2D" parent="Peixe"]
+polygon = PoolVector2Array( -12, -22, -4, -24, -2, -20, 1, -20, 3, -23, 7, -23, 11, -21, 12, -18, 12, -16, 15, -14, 19, -16, 25, -8, 22, -4, 22, 15, 14, 22, 7, 24, 0, 24, -6, 24, -11, 22, -19, 18, -23, 12, -23, -3, -25, -8, -20, -16, -16, -13, -12, -15 )

@@ -8,9 +8,9 @@ Jogo 2D de puzzle e exploração sobre um peixe de estimação de cientistas do 
 
 A arquitetura decidida tem como base o estilo de camadas (Layering), e para sua implementação foi adicionado aspectos tanto do estilo
 mediador, no que tange a interface entre os arquivos de dados guardados em um diretório de database e as componentes do jogo, quanto
-do estilo de Objetos na estrutura das componentes principais do jogo, como entidades que interagem com o jogador.
-Com o intuito de resolver um problema de projeto geral um dos principais padrões de projeto adotados foi o *Abstract Factory*, onde
-foi feito meio da utilização de uma fábrica abstrata para poder realizar abstrações de objetos do jogo. 
+do estilo de objetos na estrutura dos principais componentes do jogo, como entidades que interagem com o jogador.
+Com o intuito de resolver um problema de projeto geral um dos principais padrões de projeto adotados foi o *Abstract Factory*, o qual
+foi feito por meio da utilização de uma fábrica abstrata para poder realizar abstrações de objetos do jogo. 
 Assim, os estilos arquiteturais utilizados foram: *Camadas*, *Mediador*, *Orientação à objetos* 
 e os padrões de projeto adotados foram: *Asbtract Factory*.
 
@@ -21,7 +21,7 @@ Para melhor apresentação da arquitetura utilizada foi usado o modelo C4.
 ### Nível 1  
 No primeiro nível do diagrama é possível observar o contexto em que a aplicação se situa, note que somente ocorre a interação entre o jogador 
 e o sistema do jogo. Também é possível perceber que não há interação do sistema do jogo ou do usuário com quaisquer sistemas externos 
-a aplicação, visto que o jogo foi desenvolvido dentro de uma Game Engine como o Godot, e portanto o sistema do Godot atua como uma tecnologia para desenvolvimento do software.
+à aplicação, visto que o jogo foi desenvolvido dentro de uma Game Engine como o Godot, e portanto o sistema do Godot atua como uma tecnologia para desenvolvimento do software.
 Nesse diagrama é possível ver a existencia de um *Software System* chamado Game System, este representa todo o processo realizado pelo jogo.
 
 ![Nível 1](img/arquitetrua-1-Level.png) 
@@ -33,7 +33,7 @@ Na camada que tem contato com o player (usuário) está a User Interface (UI) qu
 referentes ao menu e suas configurações, permitindo o usuário selecionar suas preferências para customizar o jogo as suas necessidades,
 e também referentes aos inputs de controles, teclados e mouses que podem ser usados no jogo. Logo abaixo
 existem o Scene manager e o Game Manager que se responsabilizam respectivamente pela organização posicional de cenas e objetos e 
-pela renderização do jogo na camera e progressão da história, os dois containers passam informações entre si para modificar cenas e variaveis constantes entre elas. 
+pela renderização do jogo na câmera e progressão da história, os dois containers passam informações entre si para modificar cenas e variaveis constantes entre elas. 
 Abaixo está a camada dos Game Objects e suas interações, esses objetos podem receber, das duas databases, assets e 
 informações necessarias para a sua construção, eles compõem as cenas dos jogo e podem ser desde leveis, mapas e items até o personagem do player e inimigos.
 \
