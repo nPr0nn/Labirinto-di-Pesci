@@ -17,7 +17,7 @@ extents = Vector2( 30, 32 )
 bounce = 0.14
 
 [sub_resource type="CapsuleShape2D" id=6]
-radius = 13.0
+radius = 24.0
 height = 34.0
 
 [node name="TestScene" type="Node2D"]
@@ -63,11 +63,6 @@ gravity_scale = 0.5
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( 10, -4 )
-rotation = 1.5708
-shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="RigidBody2D"]
 position = Vector2( -11, 5 )
