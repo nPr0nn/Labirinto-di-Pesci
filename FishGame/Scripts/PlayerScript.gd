@@ -99,4 +99,5 @@ func _on_Water_body_entered(body):
 	alterarGravidade(true, Vector2(0, 0.005))
 
 func _on_Water_body_exited(body):
-	alterarGravidade(false, Vector2(0, 0.05))
+	velocity *= 2.7
+	alterarGravidade(false, Vector2(0, 0.15))

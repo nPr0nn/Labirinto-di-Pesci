@@ -1,15 +1,19 @@
 extends Node2D
 
-var models = {"simpleEnemy": preload("res://Scenes/SimpleEnemy.tscn"),"box": preload("res://Scenes/Caixa.tscn")}
+var models = { "simpleEnemy2": preload("res://Scenes/SimpleEnemy2.tscn"),
+				"simpleEnemy": preload("res://Scenes/SimpleEnemy.tscn"),
+				"box": preload("res://Scenes/Caixa.tscn") }
 
 func _ready():
-	for i in range(21):
-		addObject("box",-187,i*64-990)
-		addObject("box",901,i*64-990)
-		
-	
-	for i in range(17):
-		addObject("box",-187+i*64,286)
+	pass
+
+func addObjectCol(type, number_of_objects, row, col, size):
+	for i in range(number_of_objects):
+		addObject(type, row, size*i - col) 
+
+func addObjectRow(type, number_of_objects, row, col, size):
+	for i in range(number_of_objects):
+		addObject(type, row + i*size, col) 
 
 func addObject(type,x,y):
 	var enemy = models[type].instance()
@@ -17,5 +21,4 @@ func addObject(type,x,y):
 	add_child(enemy)
 
 func _process(delta):
-	if Input.is_action_pressed("spawnEnemy"):
-		addObject("simpleEnemy",0,0)
+	pass
