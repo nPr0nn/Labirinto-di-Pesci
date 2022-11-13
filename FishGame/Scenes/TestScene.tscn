@@ -33,7 +33,7 @@ position = Vector2( 181.25, -659.25 )
 shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( -236, -432 )
+position = Vector2( 126, -442 )
 
 [node name="objectFactory" parent="." instance=ExtResource( 6 )]
 position = Vector2( -180, -413 )
@@ -42,6 +42,6 @@ position = Vector2( -180, -413 )
 position = Vector2( -64, -528 )
 
 [node name="simpleEnemy2" parent="." instance=ExtResource( 8 )]
-position = Vector2( -18, -831 )
+position = Vector2( 71, -634 )
 
 [editable path="Camera"]

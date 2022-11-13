@@ -11,7 +11,7 @@ radius = 7.0
 height = 26.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 201.01
+radius = 209.01
 
 [node name="simpleEnemy2" type="Node2D"]
 
