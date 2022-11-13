@@ -15,6 +15,9 @@ var gravity = Vector2(0, 0.005)
 var target = Vector2(0, 0)
 var mouse_position
 
+func get_type():
+	return "fishPlayer"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_process(true)

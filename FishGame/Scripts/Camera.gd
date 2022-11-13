@@ -17,5 +17,3 @@ func _process(delta):
 	
 	viewport_container.material.set_shader_param("camera_offset", subpixel_camera_position)
 	global_position = real_camera_position.round()
-	
-	pass 
