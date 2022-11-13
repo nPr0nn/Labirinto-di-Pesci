@@ -6,6 +6,9 @@ var models = { "simpleEnemy2": preload("res://Scenes/SimpleEnemy2.tscn"),
 
 func _ready():
 	pass
+	
+func get_type():
+	return "objectFactory"
 
 func addObjectCol(type, number_of_objects, row, col, size):
 	for i in range(number_of_objects):
