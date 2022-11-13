@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/fundo.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/FishPlayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Water.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Caixa.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/ObjectFactory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/TestScene.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/SimpleEnemy2.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 514.75, 497.75 )
@@ -35,5 +37,11 @@ position = Vector2( -236, -432 )
 
 [node name="objectFactory" parent="." instance=ExtResource( 6 )]
 position = Vector2( -180, -413 )
+
+[node name="Caixa" parent="." instance=ExtResource( 5 )]
+position = Vector2( -64, -528 )
+
+[node name="simpleEnemy2" parent="." instance=ExtResource( 8 )]
+position = Vector2( -18, -831 )
 
 [editable path="Camera"]
