@@ -9,12 +9,17 @@ onready var state             = SwimmingState.new(self)
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
 
+
+func get_type():
+	return "player"
+
 # Variaveis importantes para o personagem
 # Lista de variaveis internas do player
 var total_time: float  = 0
 var speed: float       = 0
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
+
 
 # Funções gerais que são chamadas em todos os estados
 func _ready():
