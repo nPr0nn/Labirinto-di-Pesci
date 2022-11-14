@@ -1,10 +1,13 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/FishPlayer.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Fonts/04B_30__.TTF" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -47,29 +50,28 @@ custom_fonts/font = SubResource( 2 )
 text = "Inicia"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
-visible = false
-margin_top = 43.0
-margin_right = 137.0
-margin_bottom = 63.0
-text = "Options"
-
-[node name="Quit" type="Button" parent="VBoxContainer"]
 margin_top = 43.0
 margin_right = 274.0
 margin_bottom = 82.0
+custom_fonts/font = SubResource( 4 )
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 86.0
+margin_right = 274.0
+margin_bottom = 125.0
+focus_neighbour_bottom = NodePath("../Start")
 custom_fonts/font = SubResource( 3 )
 text = "Sair"
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 354, 233 )
-
 [node name="Label" type="Label" parent="."]
-margin_left = 123.0
-margin_top = 146.0
-margin_right = 938.0
-margin_bottom = 211.0
+margin_left = 113.0
+margin_top = 150.0
+margin_right = 942.0
+margin_bottom = 215.0
 custom_fonts/font = SubResource( 1 )
-text = "The Punk Fish!!"
+text = "Fish! Ball! CAT!!"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

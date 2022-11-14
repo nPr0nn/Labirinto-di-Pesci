@@ -1,106 +1,154 @@
+# PlayerSript: script que controla o personagem do jogador
+
 extends KinematicBody2D
-onready var Game = get_node("/root/Singleton")
 
-var click
-var useMouse = true
-var onWater = true
-var total_time = 0
-var velocity = Vector2(0,0)
-var aceleration = 0.2
-var atrito = 1-0.03
-var speed = 0
-var maxSpeed = 4.5
-var gravity = Vector2(0, 0.005)
+# Guarda informações gerais sobre o jogo (Tamanho da janela, escala, etc..)
+onready var Game              = get_node("/root/Singleton") 
+onready var state             = SwimmingState.new(self)
 
-var target = Vector2(0, 0)
-var mouse_position
+# Estados em que o personagem do player pode se encontrar
+enum STATE {SWIMMING, FALLING}
+
 
 func get_type():
 	return "player"
 
-# Called when the node enters the scene tree for the first time.
+# Variaveis importantes para o personagem
+# Lista de variaveis internas do player
+var total_time: float  = 0
+var speed: float       = 0
+var velocity: Vector2  = Vector2(0,0)
+var acceleration: float = 0.2
+
+
+# Funções gerais que são chamadas em todos os estados
 func _ready():
+	set_process_input(true)
 	set_process(true)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if useMouse:
-		mouse_position = get_viewport().get_mouse_position() / Game.window_scale - (Game.size - Vector2(10, 10))/2 + global_position
-		look_at(mouse_position)
-	else:
-		look_at(global_position+velocity)
-
-	
-func _draw():
 	pass
-#	draw_line(position, global_position + velocity, Color(255,0,0), 5)
-
+	
+func _process(delta):
+	state._process(delta)
+	pass
+	
 func _physics_process(delta):
 	total_time += delta
-	$Tail.rotate(sin(total_time*4)*0.03)	
-	$"Upper Flipper".rotate(sin(total_time*2)*0.015)
-	$Flipper.rotate(sin(total_time*2)*0.01)
+	rotate_child_sprite(1, total_time, 0.03, 0.5*PI, 0)
+	rotate_child_sprite(2, total_time, 0.01, PI, 0)
+	rotate_child_sprite(3, total_time, 0.015, PI, 0)
+	rotate_child_sprite(4, total_time, 0.015, PI, 0)
+	rotate_child_sprite(5, total_time, 0.015, 0.66*PI, 0)
+	rotate_child_sprite(6, total_time, 0.015, 0.5*PI, 0)
 	
-	$Mohawk.rotate(sin(total_time*2)*0.015)
-	$Mohawk2.rotate(sin(total_time*3)*0.015)
-	$Mohawk3.rotate(sin(total_time*4)*0.015)
-	
-	
-	if Input.is_mouse_button_pressed(1) and onWater:
-		useMouse = true
-		target = mouse_position
-		speed += aceleration
-		#velocidade eh o produto da dir pelo modulo, apenas atualiza ao clicar
-		velocity = ( global_position.direction_to(target).normalized() )* speed
-	
-	speed *= atrito
-	if speed > maxSpeed:
-		speed = maxSpeed
-	
-	click = false
-	
-#codigo geral
-	var key_up = Input.is_action_pressed("ui_up")
-	var key_down = Input.is_action_pressed("ui_down")
-	var key_left = Input.is_action_pressed("ui_left")
-	var key_right = Input.is_action_pressed("ui_right")
-	
-	if key_up and velocity.y > -maxSpeed:
-		click = true
-		if onWater:
-			velocity.y -= aceleration
-	if key_down and velocity.y < maxSpeed:
-		click = true
-		if onWater:
-			velocity.y += aceleration
-	if key_right and velocity.x < maxSpeed:
-		click = true
-		if onWater:
-			velocity.x += aceleration
-	if key_left and velocity.x > -maxSpeed:
-		click = true
-		if onWater:
-			velocity.x -= aceleration
-	if not click:
-		velocity.x *= atrito
-		velocity.y *= atrito
-	else:
-		useMouse = false
-	
-	velocity += gravity
+	# Existe apenas para debugar
+	if(Input.is_action_just_pressed("open_menu")):
+		get_tree().change_scene("res://Scenes/Options.tscn")
+		
+	state._input()
+	state._physics_process(delta)
 	move_and_collide(velocity)
+	pass
+
+# Troca o estado do peixe
+func set_state(new_state):
+	state.exit()
+	if(new_state == STATE.SWIMMING):
+		state = SwimmingState.new(self)
+	elif(new_state == STATE.FALLING):
+		state = FallingState.new(self)
+	pass
 	
-#func _on_area_mar_body_entered(body):
-#	gravity = Vector2(0, 0.005)
-#	onWater=true
+# Estado em que o peixe está nadando dentro de uma região de água
+class SwimmingState:
+	var fish
+	var gravity_on_water: Vector2  = Vector2(0, 0.001)
+	var max_speed_on_water: float  = 4.5
+	var friction_on_water: float   = 0.97
+	
+	func _init(fish):
+		self.fish = fish
 
-func alterarGravidade(agua, gravidade):
-	gravity = gravidade
-	onWater = agua
+	func _process(delta):
+		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
+			var mouse_position_on_viewport = fish.get_viewport().get_mouse_position()/fish.Game.window_scale - fish.Game.size/2
+			fish.look_at(mouse_position_on_viewport + fish.global_position)
+		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
+			fish.look_at(fish.velocity + fish.global_position)
+		pass
+	
+	func _physics_process(delta):		
+		fish.velocity += gravity_on_water
+		fish.speed = min(fish.velocity.length(), max_speed_on_water)
+		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_water
+		pass
+	
+	func _input():
+		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
+			fish.move_with_mouse()
+		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
+			fish.move_with_keyboard()
+		pass
+		
+	func exit():
+		pass
+	
+class FallingState:
+	var fish
+	var gravity_in_air: Vector2  = Vector2(0, 0.18)
+	var friction_on_air: float   = 0.96
+	
+	func _init(fish):
+		self.fish = fish
+		
+	func _process(delta):
+		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
+			var mouse_position_on_viewport = fish.get_viewport().get_mouse_position()/fish.Game.window_scale - fish.Game.size/2
+			fish.look_at(mouse_position_on_viewport + fish.global_position)
+		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
+			fish.look_at(fish.velocity + fish.global_position)
+		pass
+		
+	func _physics_process(delta):
+		fish.velocity += gravity_in_air
+		fish.speed = fish.velocity.length()
+		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_air
+		pass
+	
+	func _input():
+		pass
+		
+	func exit():
+		pass
 
+# Funções utilidades que podem ser usadas em qualquer estado
+func rotate_child_sprite(sprite_index, time, amplitude, period, phase_shift):
+	get_child(sprite_index).rotate(amplitude*sin(time * (2*PI/period) + phase_shift))	
+	pass
+	
+# Funções relacionadas ao movimento do player
+func move_with_mouse():
+	if(Input.is_mouse_button_pressed(1)):
+		var mouse_position_on_viewport = get_viewport().get_mouse_position()/Game.window_scale - Game.size/2
+		var mouse_position = mouse_position_on_viewport + global_position 
+		speed += acceleration
+		velocity = (global_position.direction_to(mouse_position).normalized() * speed)
+	pass
+
+func move_with_keyboard():
+	if(Input.is_action_pressed("ui_up")):
+		velocity.y -= acceleration
+	if(Input.is_action_pressed("ui_down")):
+		velocity.y += acceleration
+	if(Input.is_action_pressed("ui_left")):
+		velocity.x -= acceleration
+	if(Input.is_action_pressed("ui_right")):
+		velocity.x += acceleration
+	pass
+	
+# Funções relacionadas a entrar e sair da agua
 func _on_Water_body_entered(body):
-	alterarGravidade(true, Vector2(0, 0.005))
-
+	set_state(STATE.SWIMMING)
+	
 func _on_Water_body_exited(body):
 	velocity *= 2.7
-	alterarGravidade(false, Vector2(0, 0.15))
+	set_state(STATE.FALLING)
