@@ -16,7 +16,7 @@ var target = Vector2(0, 0)
 var mouse_position
 
 func get_type():
-	return "fishPlayer"
+	return "player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

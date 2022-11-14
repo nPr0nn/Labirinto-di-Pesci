@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/fundo.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scenes/ObjectFactory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/TestScene.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/SimpleEnemy2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Path1_teste.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 514.75, 497.75 )
@@ -16,8 +18,6 @@ extents = Vector2( 514.75, 497.75 )
 _data = {
 "points": PoolVector2Array( -65.5, 12, 65.5, -12, 75, -1064, -10, -1, 10, 1, 169, -1066, 17.5, -0.5, -17.5, 0.5, 259, -1064, -22.5, -6.5, 22.5, 6.5, 334, -1063, -18.5, -13, 18.5, 13, 365, -1048, 13, -27.5, -13, 27.5, 373, -1011, 15, -8, -15, 8, 349, -985, 45, 1, -45, -1, 292, -980, 26.5, 2, -26.5, -2, 250, -984, 0, 0, 0, 0, 190, -984, 0, 0, 0, 0, 129, -987, 0, 0, 0, 0, 85, -990, 7.5, 7, -7.5, -7, 67, -1004, 0, 0, 0, 0, 53, -1022, -6.35678, 11.6541, 6.35678, -11.6541, 62, -1046, 0, 0, 0, 0, 75, -1064 )
 }
-
-[sub_resource type="CircleShape2D" id=4]
 
 [node name="TestScene" type="Node2D"]
 position = Vector2( 297, 350 )
@@ -49,21 +49,17 @@ position = Vector2( -180, -413 )
 position = Vector2( -64, -528 )
 
 [node name="simpleEnemy2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 71, -634 )
+position = Vector2( 284, -1061 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -17, 4 )
 curve = SubResource( 3 )
+script = ExtResource( 9 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2( 75, -1064 )
 rotation = -0.177321
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="Path2D/PathFollow2D"]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/KinematicBody2D"]
-shape = SubResource( 4 )
-disabled = true
+[node name="followDot" parent="Path2D/PathFollow2D" instance=ExtResource( 10 )]
 
 [editable path="Camera"]
