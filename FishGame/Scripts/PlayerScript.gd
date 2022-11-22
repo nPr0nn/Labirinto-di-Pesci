@@ -69,6 +69,9 @@ class SwimmingState:
 		self.fish = fish
 
 	func _process(delta):
+		fish.detect_keyboard()
+		fish.detect_mouse()
+		
 		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
 			var mouse_position_on_viewport = fish.get_viewport().get_mouse_position()/fish.Game.window_scale - fish.Game.size/2
 			fish.look_at(mouse_position_on_viewport + fish.global_position)
@@ -133,6 +136,14 @@ func move_with_mouse():
 		speed += acceleration
 		velocity = (global_position.direction_to(mouse_position).normalized() * speed)
 	pass
+
+func detect_keyboard():
+	if(Input.is_action_pressed("ui_up") || Input.is_action_pressed("ui_down")|| Input.is_action_pressed("ui_left")|| Input.is_action_pressed("ui_right")):
+		Game.gameplay_type = Game.GAMEPLAY_TYPE.KEYBOARD
+		
+func detect_mouse():
+	if(Input.is_mouse_button_pressed(1)):
+		Game.gameplay_type = Game.GAMEPLAY_TYPE.MOUSE
 
 func move_with_keyboard():
 	if(Input.is_action_pressed("ui_up")):
