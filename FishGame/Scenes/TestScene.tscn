@@ -8,8 +8,9 @@
 [ext_resource path="res://Scenes/ObjectFactory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/TestScene.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/SimpleEnemy2.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Path1_teste.gd" type="Script" id=9]
+[ext_resource path="res://Scripts/Path1_teste.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=10]
+
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 514.75, 497.75 )
