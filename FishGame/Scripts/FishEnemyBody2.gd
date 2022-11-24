@@ -19,7 +19,6 @@ func get_type():
 func _physics_process(delta):
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
-		print("aloooo")
 	elif followDot != null:
 		velocity = (followDot.global_position - global_position).normalized() * vacantSpeed
 	else:
@@ -28,7 +27,6 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func _on_Area2D_body_entered(body):
-	print(body.get_type())
 	if body.get_type() == "player":
 		player = body
 	elif body.get_type() == "followDot":
