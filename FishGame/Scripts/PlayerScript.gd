@@ -19,6 +19,7 @@ var total_time: float  = 0
 var speed: float       = 0
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
+var timer_dash: int = 0
 
 
 # Funções gerais que são chamadas em todos os estados
@@ -29,6 +30,7 @@ func _ready():
 	
 func _process(delta):
 	state._process(delta)
+	timer_dash-=1
 	pass
 	
 func _physics_process(delta):
@@ -63,6 +65,7 @@ class SwimmingState:
 	var fish
 	var gravity_on_water: Vector2  = Vector2(0, 0.001)
 	var max_speed_on_water: float  = 4.5
+	var max_speed_dash_on_water: float = 10
 	var friction_on_water: float   = 0.97
 	
 	func _init(fish):
@@ -78,7 +81,10 @@ class SwimmingState:
 	
 	func _physics_process(delta):		
 		fish.velocity += gravity_on_water
-		fish.speed = min(fish.velocity.length(), max_speed_on_water)
+		if fish.timer_dash > 0:
+			fish.speed = min(fish.velocity.length(), max_speed_dash_on_water)
+		else:
+			fish.speed = min(fish.velocity.length(), max_speed_on_water)
 		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_water
 		pass
 	
@@ -96,6 +102,7 @@ class FallingState:
 	var fish
 	var gravity_in_air: Vector2  = Vector2(0, 0.18)
 	var friction_on_air: float   = 0.96
+	var max_speed_on_air: float  = 10
 	
 	func _init(fish):
 		self.fish = fish
@@ -111,6 +118,8 @@ class FallingState:
 	func _physics_process(delta):
 		fish.velocity += gravity_in_air
 		fish.speed = fish.velocity.length()
+		fish.speed = min(fish.velocity.length(), max_speed_on_air)
+		print(fish.velocity.length())
 		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_air
 		pass
 	
@@ -132,7 +141,12 @@ func move_with_mouse():
 		var mouse_position = mouse_position_on_viewport + global_position 
 		speed += acceleration
 		velocity = (global_position.direction_to(mouse_position).normalized() * speed)
-	pass
+	if(Input.is_mouse_button_pressed(2) and timer_dash < -30):
+		var mouse_position_on_viewport = get_viewport().get_mouse_position()/Game.window_scale - Game.size/2
+		var mouse_position = mouse_position_on_viewport + global_position 
+		speed += acceleration
+		timer_dash = 4
+		velocity = (global_position.direction_to(mouse_position).normalized() * speed * 1000)
 
 func move_with_keyboard():
 	if(Input.is_action_pressed("ui_up")):
