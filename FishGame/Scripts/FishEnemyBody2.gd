@@ -30,6 +30,11 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
+func hurt(dano = 1):
+	hp-=dano
+	print("inimigo machucado: "+str(hp))
+	if hp<=0:
+		self.get_parent().remove_and_skip()
 
 func _on_Area2D_body_entered(body):
 	if body.get_type() == "player":

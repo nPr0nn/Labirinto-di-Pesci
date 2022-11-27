@@ -52,10 +52,11 @@ func _physics_process(delta):
 	state._input()
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
-	#if colision:
-	#	if colision.get_collider().get_type() == "simpleEnemy2":
-	#		hp -= 1
-	#print(hp)
+	if colision:
+		if colision.get_collider().get_type() == "simpleEnemy2":
+			if timer_dash > 0:
+				colision.get_collider().hurt(10)
+
 # Troca o estado do peixe
 func set_state(new_state):
 	state.exit()
@@ -163,11 +164,13 @@ func move_with_keyboard():
 		velocity.x += acceleration
 
 func hurt(dano = 1):
-	hp -= dano
-	print(hp)
+	if timer_dash<-70:
+		hp -= dano
+		print(hp)
 
 func die():
-	self.remove_and_skip()
+	#self.remove_and_skip()
+	pass
 	
 # Funções relacionadas a entrar e sair da agua
 func _on_Water_body_entered(body):
