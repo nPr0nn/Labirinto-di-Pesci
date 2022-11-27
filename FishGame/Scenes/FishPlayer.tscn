@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/PlayerScript.gd" type="Script" id=1]
 [ext_resource path="res://Assets/FishPlayer/tail_sprite.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Assets/FishPlayer/mohawk_sprite.png" type="Texture" id=5]
 [ext_resource path="res://Assets/FishPlayer/upper_flipper_sprite.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/FishPlayerNo.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Healthbar.tscn" type="PackedScene" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
@@ -59,3 +60,10 @@ offset = Vector2( -20, 9 )
 position = Vector2( 10, -4 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="Healthbar" parent="PlayerBody" instance=ExtResource( 8 )]
+margin_left = -7.0
+margin_top = -28.0
+margin_right = -7.0
+margin_bottom = -28.0
+rect_scale = Vector2( 0.0487386, 0.0727516 )

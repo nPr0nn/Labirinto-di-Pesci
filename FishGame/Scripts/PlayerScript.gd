@@ -2,9 +2,11 @@
 
 extends KinematicBody2D
 
+
 # Guarda informações gerais sobre o jogo (Tamanho da janela, escala, etc..)
 onready var Game              = get_node("/root/Singleton") 
 onready var state             = SwimmingState.new(self)
+onready var health_bar = $Healthbar
 
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
@@ -55,7 +57,7 @@ func _physics_process(delta):
 	if colision:
 		if colision.get_collider().get_type() == "simpleEnemy2":
 			if timer_dash > 0:
-				colision.get_collider().hurt(10)
+				colision.get_collider().hurt(5)
 
 # Troca o estado do peixe
 func set_state(new_state):
@@ -124,7 +126,7 @@ class FallingState:
 		fish.velocity += gravity_in_air
 		fish.speed = fish.velocity.length()
 		fish.speed = min(fish.velocity.length(), max_speed_on_air)
-		print(fish.velocity.length())
+		#print(fish.velocity.length())
 		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_air
 		pass
 	
@@ -166,7 +168,8 @@ func move_with_keyboard():
 func hurt(dano = 1):
 	if timer_dash<-70:
 		hp -= dano
-		print(hp)
+		health_bar._on_health_updated(hp,0)
+		
 
 func die():
 	#self.remove_and_skip()
