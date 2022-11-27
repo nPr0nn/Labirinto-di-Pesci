@@ -2,9 +2,11 @@
 
 extends KinematicBody2D
 
+
 # Guarda informações gerais sobre o jogo (Tamanho da janela, escala, etc..)
 onready var Game              = get_node("/root/Singleton") 
 onready var state             = SwimmingState.new(self)
+onready var health_bar = $Healthbar
 
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
@@ -20,6 +22,7 @@ var speed: float       = 0
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
 var timer_dash: int = 0
+var hp: int = 100
 
 
 # Funções gerais que são chamadas em todos os estados
@@ -31,6 +34,8 @@ func _ready():
 func _process(delta):
 	state._process(delta)
 	timer_dash-=1
+	if hp<0:
+		die()
 	pass
 	
 func _physics_process(delta):
@@ -48,8 +53,11 @@ func _physics_process(delta):
 		
 	state._input()
 	state._physics_process(delta)
-	move_and_collide(velocity)
-	pass
+	var colision = move_and_collide(velocity)
+	if colision:
+		if colision.get_collider().get_type() == "simpleEnemy2":
+			if timer_dash > 0:
+				colision.get_collider().hurt(5)
 
 # Troca o estado do peixe
 func set_state(new_state):
@@ -113,13 +121,12 @@ class FallingState:
 			fish.look_at(mouse_position_on_viewport + fish.global_position)
 		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
 			fish.look_at(fish.velocity + fish.global_position)
-		pass
 		
 	func _physics_process(delta):
 		fish.velocity += gravity_in_air
 		fish.speed = fish.velocity.length()
 		fish.speed = min(fish.velocity.length(), max_speed_on_air)
-		print(fish.velocity.length())
+		#print(fish.velocity.length())
 		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_air
 		pass
 	
@@ -157,6 +164,15 @@ func move_with_keyboard():
 		velocity.x -= acceleration
 	if(Input.is_action_pressed("ui_right")):
 		velocity.x += acceleration
+
+func hurt(dano = 1):
+	if timer_dash<-70:
+		hp -= dano
+		health_bar._on_health_updated(hp,0)
+		
+
+func die():
+	#self.remove_and_skip()
 	pass
 	
 # Funções relacionadas a entrar e sair da agua
