@@ -8,7 +8,7 @@ func _on_Start_pressed():
 	get_tree().change_scene("res://Scenes/GameViewport.tscn")
 
 func _on_Options_pressed():
-	get_tree().change_scene("res://Scenes/Options.tscn")
+	get_child(3).visible = true
 
 func _on_Quit_pressed():
 	get_tree().quit()

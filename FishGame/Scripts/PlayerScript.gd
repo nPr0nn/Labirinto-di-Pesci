@@ -9,7 +9,6 @@ onready var state             = SwimmingState.new(self)
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
 
-
 func get_type():
 	return "player"
 
@@ -20,7 +19,6 @@ var speed: float       = 0
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
 var timer_dash: int = 0
-
 
 # Funções gerais que são chamadas em todos os estados
 func _ready():
@@ -41,10 +39,6 @@ func _physics_process(delta):
 	rotate_child_sprite(4, total_time, 0.015, PI, 0)
 	rotate_child_sprite(5, total_time, 0.015, 0.66*PI, 0)
 	rotate_child_sprite(6, total_time, 0.015, 0.5*PI, 0)
-	
-	# Existe apenas para debugar
-	if(Input.is_action_just_pressed("open_menu")):
-		get_tree().change_scene("res://Scenes/Options.tscn")
 		
 	state._input()
 	state._physics_process(delta)

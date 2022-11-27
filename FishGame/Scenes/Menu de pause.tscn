@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Fonts/04B_30__.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Menu de pause.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Options.tscn" type="PackedScene" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="Menu de pause" type="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.133333, 0.156863, 0.223529, 0.701961 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 417.0
+margin_top = 225.0
+margin_right = 606.0
+margin_bottom = 350.0
+
+[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 189.0
+margin_bottom = 39.0
+focus_neighbour_top = NodePath("../Quit")
+custom_fonts/font = SubResource( 1 )
+text = "Resumir"
+
+[node name="Options" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 43.0
+margin_right = 189.0
+margin_bottom = 82.0
+custom_fonts/font = SubResource( 1 )
+text = "Opçcoes"
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 86.0
+margin_right = 189.0
+margin_bottom = 125.0
+focus_neighbour_bottom = NodePath("../Resume")
+custom_fonts/font = SubResource( 1 )
+text = "Sair"
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
