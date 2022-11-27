@@ -20,6 +20,7 @@ var speed: float       = 0
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
 var timer_dash: int = 0
+var hp: int = 100
 
 
 # Funções gerais que são chamadas em todos os estados
@@ -31,6 +32,8 @@ func _ready():
 func _process(delta):
 	state._process(delta)
 	timer_dash-=1
+	if hp<0:
+		die()
 	pass
 	
 func _physics_process(delta):
@@ -48,9 +51,11 @@ func _physics_process(delta):
 		
 	state._input()
 	state._physics_process(delta)
-	move_and_collide(velocity)
-	pass
-
+	var colision = move_and_collide(velocity)
+	#if colision:
+	#	if colision.get_collider().get_type() == "simpleEnemy2":
+	#		hp -= 1
+	#print(hp)
 # Troca o estado do peixe
 func set_state(new_state):
 	state.exit()
@@ -113,7 +118,6 @@ class FallingState:
 			fish.look_at(mouse_position_on_viewport + fish.global_position)
 		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
 			fish.look_at(fish.velocity + fish.global_position)
-		pass
 		
 	func _physics_process(delta):
 		fish.velocity += gravity_in_air
@@ -157,7 +161,13 @@ func move_with_keyboard():
 		velocity.x -= acceleration
 	if(Input.is_action_pressed("ui_right")):
 		velocity.x += acceleration
-	pass
+
+func hurt(dano = 1):
+	hp -= dano
+	print(hp)
+
+func die():
+	self.remove_and_skip()
 	
 # Funções relacionadas a entrar e sair da agua
 func _on_Water_body_entered(body):

@@ -6,6 +6,7 @@ var followDot = null
 var velocity = Vector2.ZERO
 var maxSpeed = 200
 var vacantSpeed = 80
+var hp: int = 100
 
 func _ready():
 	var cena = get_parent().get_parent()
@@ -25,6 +26,10 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 
 	velocity = move_and_slide(velocity)
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.name == "PlayerBody":
+			collision.collider.hurt()
 
 func _on_Area2D_body_entered(body):
 	if body.get_type() == "player":
