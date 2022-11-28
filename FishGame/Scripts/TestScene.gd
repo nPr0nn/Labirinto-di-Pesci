@@ -19,5 +19,5 @@ func _process(_delta):
 func get_indexes():
 	filhos = get_child_count()
 	for i in range(filhos):
-		if get_child(i).get_type() == "objectFactory":
+		if get_child(i).name == "objectFactory":
 			index_object_factory = i
