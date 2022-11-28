@@ -38,7 +38,7 @@ func hurt(dano = 1):
 	hp-=dano
 	health_bar._on_health_updated(hp,0)
 	if hp<=0:
-		self.get_parent().remove_and_skip()
+		queue_free()
 
 func _on_Area2D_body_entered(body):
 	print(body.name)

@@ -15,9 +15,9 @@ height = 26.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 220.111
 
-[node name="simpleEnemy2" type="Node2D"]
+[node name="simpleEnemy2" type="Node2D" groups=["enemies"]]
 
-[node name="Fish Enemy Body" type="KinematicBody2D" parent="."]
+[node name="Fish Enemy Body" type="KinematicBody2D" parent="." groups=["enemies"]]
 script = ExtResource( 2 )
 
 [node name="Body" type="Sprite" parent="Fish Enemy Body"]

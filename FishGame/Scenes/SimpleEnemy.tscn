@@ -10,7 +10,7 @@
 radius = 7.0
 height = 26.0
 
-[node name="simpleEnemy" type="Node2D"]
+[node name="simpleEnemy" type="Node2D" groups=["enemies"]]
 
 [node name="Fish Enemy Body" type="RigidBody2D" parent="."]
 script = ExtResource( 2 )
