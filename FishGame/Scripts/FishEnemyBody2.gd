@@ -12,13 +12,13 @@ onready var health_bar = $Healthbar
 func _ready():
 	var cena = get_parent().get_parent()
 	for child in cena.get_children():
-		if child.get_type() == "Path":
+		print(child.name)
+		if child.name == "Path2D":
 			followDot = child.get_child(0).get_child(0)
 
-func get_type():
-	return "simpleEnemy2"
-
 func _physics_process(delta):
+	#print("folowdot: ")
+	#print(followDot)
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
 	elif followDot != null:
@@ -27,10 +27,13 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 
 	velocity = move_and_slide(velocity)
+	
+	#colisions
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
+			
 func hurt(dano = 1):
 	hp-=dano
 	health_bar._on_health_updated(hp,0)
@@ -38,9 +41,10 @@ func hurt(dano = 1):
 		self.get_parent().remove_and_skip()
 
 func _on_Area2D_body_entered(body):
-	if body.get_type() == "player":
+	print(body.name)
+	if body.name == "PlayerBody":
 		player = body
-	elif body.get_type() == "followDot":
+	elif body.name == "followDot":
 		followDot = body
 
 func _on_Area2D_body_exited(body):

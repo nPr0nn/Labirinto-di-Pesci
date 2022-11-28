@@ -49,7 +49,8 @@ func _physics_process(delta):
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
 	if colision:
-		if colision.get_collider().get_type() == "simpleEnemy2":
+		print(colision.get_collider().name)
+		if colision.get_collider().name == "Fish Enemy Body":
 			if timer_dash > 0:
 				colision.get_collider().hurt(5)
 
@@ -171,10 +172,10 @@ func die():
 	
 # Funções relacionadas a entrar e sair da agua
 func _on_Water_body_entered(body):
-	if(body.get_type() == "player"):
+	if(body.name == "PlayerBody"):
 		set_state(STATE.SWIMMING)
 	
 func _on_Water_body_exited(body):
-	if(body.get_type() == "player"):
+	if(body.name == "PlayerBody"):
 		velocity *= 2.7
 		set_state(STATE.FALLING)
