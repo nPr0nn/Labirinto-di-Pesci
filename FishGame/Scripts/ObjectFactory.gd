@@ -13,13 +13,13 @@ func _ready():
 func get_type():
 	return "objectFactory"
 	
-func build_map():
+func build_map(x,y):
 	var dados = []
 	load_file("res://Data/mapa.txt", dados)
 	for i in range(len(dados)):
 		for j in range(len(dados[i])):
 			if dados[i][j] == "#":
-				addObject("box", j*escala-187, i*escala-1186) 
+				addObject("box", j*escala+x, i*escala+y) 
 	
 func load_file(file, dados):
 

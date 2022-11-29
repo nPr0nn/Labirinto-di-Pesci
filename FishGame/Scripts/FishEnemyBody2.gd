@@ -44,4 +44,5 @@ func _on_Area2D_body_entered(body):
 		followDot = body
 
 func _on_Area2D_body_exited(body):
-	player = null
+	if body.name == "PlayerBody":
+		player = null
