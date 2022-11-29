@@ -12,7 +12,7 @@
 [ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 514.75, 497.75 )
+extents = Vector2( 2508.38, 601.375 )
 
 [sub_resource type="Curve2D" id=3]
 _data = {
@@ -31,12 +31,12 @@ scale = Vector2( 1.61388, 1.5875 )
 script = ExtResource( 4 )
 
 [node name="WaterSprite" type="Sprite" parent="Water"]
-position = Vector2( 182, -667 )
-scale = Vector2( 1.61388, 1.5875 )
+position = Vector2( 2173.88, -762.5 )
+scale = Vector2( 7.82878, 1.88594 )
 texture = ExtResource( 1 )
 
 [node name="WaterCollision" type="CollisionShape2D" parent="Water"]
-position = Vector2( 177, -661 )
+position = Vector2( 2170.63, -764.625 )
 shape = SubResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]

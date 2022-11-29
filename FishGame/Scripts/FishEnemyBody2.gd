@@ -12,13 +12,10 @@ onready var health_bar = $Healthbar
 func _ready():
 	var cena = get_parent().get_parent()
 	for child in cena.get_children():
-		print(child.name)
 		if child.name == "Path2D":
 			followDot = child.get_child(0).get_child(0)
 
 func _physics_process(delta):
-	#print("folowdot: ")
-	#print(followDot)
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
 	elif followDot != null:
@@ -41,7 +38,6 @@ func hurt(dano = 1):
 		queue_free()
 
 func _on_Area2D_body_entered(body):
-	print(body.name)
 	if body.name == "PlayerBody":
 		player = body
 	elif body.name == "followDot":
