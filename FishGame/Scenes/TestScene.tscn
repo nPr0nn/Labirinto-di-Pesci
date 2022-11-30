@@ -51,6 +51,9 @@ position = Vector2( -64, -528 )
 [node name="simpleEnemy2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 284, -1061 )
 
+[node name="simpleEnemy3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 761, -944 )
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -17, 4 )
 curve = SubResource( 3 )

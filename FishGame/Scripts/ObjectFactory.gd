@@ -22,7 +22,6 @@ func build_map(x,y):
 				addObject("box", j*escala+x, i*escala+y) 
 	
 func load_file(file, dados):
-
 	var f = File.new()
 	f.open(file, File.READ)
 	while not f.eof_reached():
@@ -42,6 +41,7 @@ func addObject(type,x,y):
 	var enemy = models[type].instance()
 	enemy.global_position = Vector2(x,y)
 	add_child(enemy)
+	return enemy
 
 func _process(delta):
 	pass
