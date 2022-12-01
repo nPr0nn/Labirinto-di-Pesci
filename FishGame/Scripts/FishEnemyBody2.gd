@@ -1,19 +1,21 @@
 extends KinematicBody2D
 
 var player = null
-var followDot = null
 
 var velocity = Vector2.ZERO
 var maxSpeed = 200
 var vacantSpeed = 80
 var hp: int = 100
+var followDot = null
 onready var health_bar = $Healthbar
+var caminho
 
 func _ready():
-	var cena = get_parent().get_parent()
-	for child in cena.get_children():
-		if child.name == "Path2D":
-			followDot = child.get_child(0).get_child(0)
+	caminho = get_parent().get_child(0)
+	print(caminho)
+	followDot = caminho.get_child(0).get_child(0)
+	print(followDot)
+	pass
 
 func _physics_process(delta):
 	if player != null:
@@ -40,8 +42,7 @@ func hurt(dano = 1):
 func _on_Area2D_body_entered(body):
 	if body.name == "PlayerBody":
 		player = body
-	elif body.name == "followDot":
-		followDot = body
+		pass
 
 func _on_Area2D_body_exited(body):
 	if body.name == "PlayerBody":
