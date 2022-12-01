@@ -4,6 +4,7 @@ onready var object_factory = $objectFactory
 
 func _ready():
 	object_factory.build_map(-187,-1186)
+	pass
 	
 func _process(_delta):
 	if Input.is_key_pressed(KEY_K):

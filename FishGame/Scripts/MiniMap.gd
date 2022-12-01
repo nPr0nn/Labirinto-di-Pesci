@@ -2,7 +2,7 @@ extends MarginContainer
 onready var Game = get_node("/root/Singleton")
 
 export (NodePath) var player
-export var zoom = 1
+export var zoom = 6
 
 onready var grid = $MarginContainer/Grid
 onready var player_marker = $MarginContainer/Grid/PlayerMarker
@@ -16,7 +16,7 @@ var markers = {}
 	
 func _ready():
 	icons['enemy'] = enemy_marker
-	icons['block'] = hero_marker
+	icons['box'] = hero_marker
 	icons['npc']   = npc_marker
 	
 	player_marker.position = grid.rect_size / 2
@@ -36,6 +36,7 @@ func _process(delta):
 	player_marker.rotation = get_node(player).rotation + PI / 2
 			
 	for item in markers:
+		markers[item].show()
 		var radius = grid.rect_size.x/2		
 		var obj_pos = (item.get_child(0).global_position - get_node(player).global_position)*grid_scale + grid.rect_size/2
 
@@ -49,8 +50,8 @@ func _process(delta):
 		pos *= Vector2(radius, radius)
 		pos += Vector2(radius, radius)
 
-		if( lim > radius ):
-			obj_pos = pos
+		if( lim > radius):
+			markers[item].hide()
 
 		markers[item].position = obj_pos
 
@@ -58,7 +59,7 @@ func _new_marker(item):
 	var new_marker = icons[item.get_child(0).minimap_icon].duplicate()
 	grid.add_child(new_marker)
 	new_marker.show ()
-	markers [item] = new_marker
+	markers[item] = new_marker
 	item.get_child(0).connect("removed", self, "_on_object_removed")
 
 func _on_object_removed(item):
