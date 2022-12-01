@@ -3,7 +3,7 @@ extends KinematicBody2D
 var player = null
 
 var velocity = Vector2.ZERO
-var maxSpeed = 200
+var maxSpeed = 110
 var vacantSpeed = 80
 var hp: int = 100
 var followDot = null

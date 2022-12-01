@@ -3,7 +3,7 @@ extends KinematicBody2D
 var player = null
 
 var velocity = Vector2.ZERO
-var maxSpeed = 100
+var maxSpeed = 150
 var vacantSpeed = 80
 var hp: int = 100
 var timer: int = 0
@@ -28,7 +28,7 @@ func _physics_process(delta):
 			var dir = Vector2(rnd.randf_range(-1,1),rnd.randf_range(-1,1))
 			#print(dir)
 			#velocity = (dir).normalized() * maxSpeed
-			update_tween.interpolate_property(self,"velocity",self.velocity,(dir).normalized() * maxSpeed,0.4,Tween.TRANS_SINE,Tween.EASE_IN_OUT,0.4)
+			update_tween.interpolate_property(self,"velocity",self.velocity,(dir).normalized() * vacantSpeed,0.4,Tween.TRANS_SINE,Tween.EASE_IN_OUT,0.4)
 			update_tween.start()
 			#print(self.position)
 			timer =200
