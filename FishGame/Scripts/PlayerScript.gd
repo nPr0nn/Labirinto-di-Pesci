@@ -7,6 +7,7 @@ extends KinematicBody2D
 onready var Game              = get_node("/root/Singleton") 
 onready var state             = SwimmingState.new(self)
 onready var health_bar = $Healthbar
+var enemys = ["BigEnemy Body", "LittleEnemyBody"]
 
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
@@ -49,8 +50,8 @@ func _physics_process(delta):
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
 	if colision:
-		print(colision.get_collider().name)
-		if colision.get_collider().name == "Fish Enemy Body":
+		#print(colision.get_collider().name)
+		if enemys.has(colision.get_collider().name):
 			if timer_dash > 0:
 				colision.get_collider().hurt(5)
 

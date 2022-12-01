@@ -3,19 +3,29 @@ extends KinematicBody2D
 var player = null
 
 var velocity = Vector2.ZERO
-var maxSpeed = 200
+var maxSpeed = 100
 var vacantSpeed = 80
 var hp: int = 100
+var timer: int = 0
 onready var health_bar = $Healthbar
+var rnd = RandomNumberGenerator.new()
 
 func _ready():
-	pass
+	 rnd.randomize()
 
 func _physics_process(delta):
+	
+		
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
 	else:
-		velocity = Vector2.ZERO
+		if timer <=0:
+			#print("muda velocidade")
+			var dir = Vector2(rnd.randf_range(-1,1),rnd.randf_range(-1,1))
+			#print(dir)
+			velocity = (dir).normalized() * maxSpeed
+			#print(self.position)
+			timer =200
 
 	velocity = move_and_slide(velocity)
 	
@@ -24,6 +34,7 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
+	timer -= 1
 			
 func hurt(dano = 1):
 	hp-=dano

@@ -11,10 +11,8 @@ onready var health_bar = $Healthbar
 var caminho
 
 func _ready():
-	caminho = get_parent().get_child(0)
-	print(caminho)
+	caminho = get_parent().get_child(1)
 	followDot = caminho.get_child(0).get_child(0)
-	print(followDot)
 	pass
 
 func _physics_process(delta):
@@ -41,7 +39,7 @@ func hurt(dano = 1):
 
 func _on_Area2D_body_entered(body):
 	if body.name == "PlayerBody":
-		player = body
+		#player = body
 		pass
 
 func _on_Area2D_body_exited(body):

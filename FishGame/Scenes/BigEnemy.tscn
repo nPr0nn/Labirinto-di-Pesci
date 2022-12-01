@@ -10,12 +10,6 @@
 [ext_resource path="res://Scripts/Path1_teste.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=9]
 
-[sub_resource type="Curve2D" id=3]
-bake_interval = 0.01
-_data = {
-"points": PoolVector2Array( -65.5, 12, 65.5, -12, 75, -1064, -28.7158, -2.07435, 28.7158, 2.07435, 156.645, -1051.21, -12.2716, 4.35046, 12.2716, -4.35046, 200, -1062, -25.2466, -5.81876, 25.2466, 5.81876, 260.339, -1063.35, -19.5829, 5.03109, 19.5829, -5.03109, 313.29, -1055.49, -20.2664, -8.53479, 20.2664, 8.53479, 360.357, -1060.49, 0, 0, 0, 0, 381.684, -1039.07, 0, 0, 0, 0, 383.89, -1021.93, 8.42709, -8.67055, -8.42709, 8.67055, 373.594, -992.651, 17.4764, -0.986072, -17.4764, 0.986072, 348.59, -979.796, 45.4917, 1.39085, -45.4917, -1.39085, 294.169, -994.079, 35.335, 12.9625, -35.335, -12.9625, 221.362, -989.794, 19.6334, -0.953259, -19.6334, 0.953259, 166.205, -999.792, 22.0876, -2.38315, -22.0876, 2.38315, 113.99, -986.937, 0, 0, 0, 0, 87.5151, -989.08, 15.3421, 10.006, -15.3421, -10.006, 67, -1004, -6.35678, 11.6541, 6.35678, -11.6541, 62, -1046, 0, 0, 0, 0, 75, -1064 )
-}
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
 height = 26.0
@@ -23,19 +17,13 @@ height = 26.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 220.111
 
+[sub_resource type="Curve2D" id=3]
+bake_interval = 0.01
+_data = {
+"points": PoolVector2Array( -65.5, 12, 65.5, -12, 75, -1064, -28.7158, -2.07435, 28.7158, 2.07435, 156.645, -1051.21, -12.2716, 4.35046, 12.2716, -4.35046, 200, -1062, -25.2466, -5.81876, 25.2466, 5.81876, 260.339, -1063.35, -19.5829, 5.03109, 19.5829, -5.03109, 313.29, -1055.49, -20.2664, -8.53479, 20.2664, 8.53479, 360.357, -1060.49, 0, 0, 0, 0, 381.684, -1039.07, 0, 0, 0, 0, 383.89, -1021.93, 8.42709, -8.67055, -8.42709, 8.67055, 373.594, -992.651, 17.4764, -0.986072, -17.4764, 0.986072, 348.59, -979.796, 45.4917, 1.39085, -45.4917, -1.39085, 294.169, -994.079, 35.335, 12.9625, -35.335, -12.9625, 221.362, -989.794, 19.6334, -0.953259, -19.6334, 0.953259, 166.205, -999.792, 22.0876, -2.38315, -22.0876, 2.38315, 113.99, -986.937, 0, 0, 0, 0, 87.5151, -989.08, 15.3421, 10.006, -15.3421, -10.006, 67, -1004, -6.35678, 11.6541, 6.35678, -11.6541, 62, -1046, 0, 0, 0, 0, 75, -1064 )
+}
+
 [node name="BigEnemy" type="Node2D" groups=["enemies"]]
-
-[node name="Caminho" type="Path2D" parent="."]
-position = Vector2( -300, 1420 )
-scale = Vector2( 1.35976, 1.40029 )
-curve = SubResource( 3 )
-script = ExtResource( 8 )
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Caminho"]
-position = Vector2( 75, -1064 )
-rotation = -0.169093
-
-[node name="Ponto" parent="Caminho/PathFollow2D" instance=ExtResource( 9 )]
 
 [node name="BigEnemy Body" type="KinematicBody2D" parent="." groups=["enemies"]]
 script = ExtResource( 2 )
@@ -83,6 +71,18 @@ margin_top = -33.0
 margin_right = -44.0
 margin_bottom = -33.0
 rect_scale = Vector2( 0.181177, 0.116737 )
+
+[node name="Caminho" type="Path2D" parent="."]
+position = Vector2( -300, 1420 )
+scale = Vector2( 1.35976, 1.40029 )
+curve = SubResource( 3 )
+script = ExtResource( 8 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Caminho"]
+position = Vector2( 75, -1064 )
+rotation = -0.169093
+
+[node name="Ponto" parent="Caminho/PathFollow2D" instance=ExtResource( 9 )]
 
 [connection signal="body_entered" from="BigEnemy Body/Vision" to="BigEnemy Body" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="BigEnemy Body/Vision" to="BigEnemy Body" method="_on_Area2D_body_exited"]
