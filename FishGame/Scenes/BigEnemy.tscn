@@ -56,6 +56,7 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Vision" type="Area2D" parent="BigEnemy Body"]
+visible = false
 
 [node name="VisionArea" type="CollisionShape2D" parent="BigEnemy Body/Vision"]
 shape = SubResource( 2 )
@@ -73,6 +74,7 @@ margin_bottom = -33.0
 rect_scale = Vector2( 0.181177, 0.116737 )
 
 [node name="Caminho" type="Path2D" parent="."]
+visible = false
 position = Vector2( -300, 1420 )
 scale = Vector2( 1.35976, 1.40029 )
 curve = SubResource( 3 )

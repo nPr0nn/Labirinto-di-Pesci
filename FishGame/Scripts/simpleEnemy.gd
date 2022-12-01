@@ -9,13 +9,17 @@ var hp: int = 100
 var timer: int = 0
 onready var health_bar = $Healthbar
 var rnd = RandomNumberGenerator.new()
+var armor = 0.1
+onready var update_tween = $UpdateTween
 
 func _ready():
 	 rnd.randomize()
 
 func _physics_process(delta):
 	
-		
+	self.look_at(velocity+self.global_position)
+	
+	
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
 	else:
@@ -23,7 +27,9 @@ func _physics_process(delta):
 			#print("muda velocidade")
 			var dir = Vector2(rnd.randf_range(-1,1),rnd.randf_range(-1,1))
 			#print(dir)
-			velocity = (dir).normalized() * maxSpeed
+			#velocity = (dir).normalized() * maxSpeed
+			update_tween.interpolate_property(self,"velocity",self.velocity,(dir).normalized() * maxSpeed,0.4,Tween.TRANS_SINE,Tween.EASE_IN_OUT,0.4)
+			update_tween.start()
 			#print(self.position)
 			timer =200
 
@@ -37,14 +43,14 @@ func _physics_process(delta):
 	timer -= 1
 			
 func hurt(dano = 1):
-	hp-=dano
+	hp-=dano*(1-self.armor)
 	health_bar._on_health_updated(hp,0)
 	if hp<=0:
 		queue_free()
 
 func _on_Vision_body_entered(body):
 	if body.name == "PlayerBody":
-		#player = body
+		player = body
 		pass
 
 
