@@ -10,9 +10,11 @@ var hp: int = 100
 onready var health_bar = $Healthbar
 var minimap_icon = "enemy"
 
+signal removed
 		
 func _ready():
-	var cena = get_parent().get_parent()
+	var cena = get_parent().get_parent().get_parent()
+	cena.get_parent().get_parent().get_parent().find_node("MiniMap")._new_marker(get_parent())	
 	for child in cena.get_children():
 		if child.name == "Path2D":
 			followDot = child.get_child(0).get_child(0)
@@ -42,9 +44,8 @@ func hurt(dano = 1):
 		dead()
 		
 func dead():
-	print("MORREEE")
-	emit_signal("removed", self)
-	queue_free()
+	emit_signal("removed", get_parent())
+	get_parent().queue_free()
 
 func _on_Area2D_body_entered(body):
 	if body.name == "PlayerBody":

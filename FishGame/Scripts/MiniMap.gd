@@ -5,18 +5,20 @@ export (NodePath) var player
 export var zoom = 1
 
 onready var grid = $MarginContainer/Grid
-
 onready var player_marker = $MarginContainer/Grid/PlayerMarker
 onready var enemy_marker = $MarginContainer/Grid/EnemyMarker
 onready var hero_marker = $MarginContainer/Grid/HeroMarker
 onready var npc_marker = $MarginContainer/Grid/NpcMarker
 
-onready var icons = {'enemy': enemy_marker, 'hero': hero_marker, 'npc': npc_marker}
-
 var grid_scale
+var icons = {}
 var markers = {}
-
+	
 func _ready():
+	icons['enemy'] = enemy_marker
+	icons['block'] = hero_marker
+	icons['npc']   = npc_marker
+	
 	player_marker.position = grid.rect_size / 2
 	grid_scale = grid.rect_size / ((get_viewport_rect().size/Game.window_scale) * zoom)
 	var map_objects = get_tree().get_nodes_in_group("minimap_objects")
@@ -27,7 +29,6 @@ func _ready():
 		new_marker.show()
 		markers[item] = new_marker
 		item.get_child(0).connect("removed", self, "_on_object_removed")
-
 
 func _process(delta):
 	if !player:
@@ -54,14 +55,13 @@ func _process(delta):
 		markers[item].position = obj_pos
 
 func _new_marker(item):
-	print(item)
-#	grid.add_child(new_marker)
-#	new_marker.show()
-#	markers[item] = new_marker
-#	item.get_child(0).connect("removed", self, "_on_object_removed")
+	var new_marker = icons[item.get_child(0).minimap_icon].duplicate()
+	grid.add_child(new_marker)
+	new_marker.show ()
+	markers [item] = new_marker
+	item.get_child(0).connect("removed", self, "_on_object_removed")
 
 func _on_object_removed(item):
-	print("AAAAAAA")
 	markers[item].hide()
 	markers.erase(item)
 
