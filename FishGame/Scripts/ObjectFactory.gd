@@ -10,9 +10,6 @@ var escala = 64
 func _ready():
 	pass
 	
-func get_type():
-	return "objectFactory"
-	
 func build_map(x,y):
 	var dados = []
 	load_file("res://Data/mapa.txt", dados)

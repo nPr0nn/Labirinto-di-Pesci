@@ -2,9 +2,6 @@ extends Node2D
 
 onready var pathfollow = get_parent()
 
-func get_type():
-	return "followDot"
-
 func _ready():
 	pass
 
