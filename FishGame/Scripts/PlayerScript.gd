@@ -7,6 +7,7 @@ extends KinematicBody2D
 onready var Game              = get_node("/root/Singleton") 
 onready var state             = SwimmingState.new(self)
 onready var health_bar = $Healthbar
+var enemys = ["BigEnemy Body", "LittleEnemyBody"]
 
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
@@ -49,8 +50,8 @@ func _physics_process(delta):
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
 	if colision:
-		print(colision.get_collider().name)
-		if colision.get_collider().name == "Fish Enemy Body":
+		#print(colision.get_collider().name)
+		if enemys.has(colision.get_collider().name):
 			if timer_dash > 0:
 				colision.get_collider().hurt(5)
 
@@ -143,7 +144,7 @@ func move_with_mouse():
 		var mouse_position = mouse_position_on_viewport + global_position 
 		speed += acceleration
 		velocity = (global_position.direction_to(mouse_position).normalized() * speed)
-	if(Input.is_mouse_button_pressed(2) and timer_dash < -30):
+	if(Input.is_mouse_button_pressed(2) and timer_dash < -80):
 		var mouse_position_on_viewport = get_viewport().get_mouse_position()/Game.window_scale - Game.size/2
 		var mouse_position = mouse_position_on_viewport + global_position 
 		speed += acceleration
@@ -159,6 +160,12 @@ func move_with_keyboard():
 		velocity.x -= acceleration
 	if(Input.is_action_pressed("ui_right")):
 		velocity.x += acceleration
+	if(Input.is_action_pressed("ui_right")):
+		velocity.x += acceleration
+	if(Input.is_action_pressed("dash") and timer_dash < -30):
+		speed += acceleration
+		timer_dash = 4
+		velocity = velocity*1000
 
 func hurt(dano = 1):
 	if timer_dash<-70:

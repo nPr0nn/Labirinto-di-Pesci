@@ -1,7 +1,7 @@
 extends Node2D
 
-var models = { "simpleEnemy2": preload("res://Scenes/SimpleEnemy2.tscn"),
-				"simpleEnemy": preload("res://Scenes/SimpleEnemy.tscn"),
+var models = { "BigEnemy": preload("res://Scenes/BigEnemy.tscn"),
+				"LittleEnemy": preload("res://Scenes/LittleEnemy.tscn"),
 				"box": preload("res://Scenes/Caixa.tscn") }
 
 
@@ -10,16 +10,17 @@ var escala = 64
 func _ready():
 	pass
 	
-func get_type():
-	return "objectFactory"
-	
 func build_map(x,y):
 	var dados = []
 	load_file("res://Data/mapa.txt", dados)
 	for i in range(len(dados)):
 		for j in range(len(dados[i])):
 			if dados[i][j] == "#":
-				addObject("box", j*escala+x, i*escala+y) 
+				addObject("box", j*escala+x, i*escala+y)
+			if dados[i][j] == "B":
+				addObject("BigEnemy", j*escala+x, i*escala+y)
+			if dados[i][j] == "L":
+				addObject("LittleEnemy", j*escala+x, i*escala+y) 
 	
 func load_file(file, dados):
 

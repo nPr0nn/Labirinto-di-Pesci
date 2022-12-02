@@ -1,21 +1,23 @@
 extends KinematicBody2D
 
 var player = null
-var followDot = null
 
 var velocity = Vector2.ZERO
-var maxSpeed = 200
+var maxSpeed = 110
 var vacantSpeed = 80
 var hp: int = 100
+var followDot = null
 onready var health_bar = $Healthbar
+var caminho
+var armor = 0.5
 
 func _ready():
-	var cena = get_parent().get_parent()
-	for child in cena.get_children():
-		if child.name == "Path2D":
-			followDot = child.get_child(0).get_child(0)
+	caminho = get_parent().get_child(1)
+	followDot = caminho.get_child(0).get_child(0)
+	pass
 
 func _physics_process(delta):
+	self.look_at(velocity+self.global_position)
 	if player != null:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
 	elif followDot != null:
@@ -32,7 +34,7 @@ func _physics_process(delta):
 			collision.collider.hurt()
 			
 func hurt(dano = 1):
-	hp-=dano
+	hp-=dano*(1-self.armor)
 	health_bar._on_health_updated(hp,0)
 	if hp<=0:
 		queue_free()
@@ -40,8 +42,7 @@ func hurt(dano = 1):
 func _on_Area2D_body_entered(body):
 	if body.name == "PlayerBody":
 		player = body
-	elif body.name == "followDot":
-		followDot = body
+		pass
 
 func _on_Area2D_body_exited(body):
 	if body.name == "PlayerBody":
