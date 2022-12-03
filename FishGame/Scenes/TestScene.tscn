@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=8 format=2]
+=======
+[gd_scene load_steps=12 format=2]
+>>>>>>> 23-implementar-o-um-minimapa-do-player
 
 [ext_resource path="res://Assets/fundo.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Camera.tscn" type="PackedScene" id=2]
@@ -6,6 +10,11 @@
 [ext_resource path="res://Scenes/Caixa.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/ObjectFactory.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/TestScene.gd" type="Script" id=7]
+<<<<<<< HEAD
+=======
+[ext_resource path="res://Scripts/Path1_teste.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=10]
+>>>>>>> 23-implementar-o-um-minimapa-do-player
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2508.38, 601.375 )
@@ -38,4 +47,18 @@ position = Vector2( -180, -413 )
 [node name="Caixa" parent="." instance=ExtResource( 5 )]
 position = Vector2( -64, -528 )
 
+<<<<<<< HEAD
+=======
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( -17, 4 )
+curve = SubResource( 3 )
+script = ExtResource( 9 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2( 75, -1064 )
+rotation = -0.177321
+
+[node name="followDot" parent="Path2D/PathFollow2D" instance=ExtResource( 10 )]
+
+>>>>>>> 23-implementar-o-um-minimapa-do-player
 [editable path="Camera"]
