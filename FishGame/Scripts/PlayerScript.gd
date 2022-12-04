@@ -183,8 +183,15 @@ func _on_Water_body_exited(body):
 		velocity *= 2.7
 		set_state(STATE.FALLING)
 
-func heal(amount):
-	hp += amount
-	if (hp > 100):
-		hp = 100
-	health_bar._on_health_updated(hp,0)
+func heal(amount,show  = true):
+	if typeof(amount) == 2:
+		var old_hp = hp
+		hp += amount
+		if (hp > 100):
+			hp = 100
+		if show: 
+			health_bar._on_health_updated(hp,0)
+		return (hp - old_hp)
+	else:
+		return "Entrada invalida para a função."
+		
