@@ -12,9 +12,6 @@ var enemys = ["BigEnemy Body", "LittleEnemyBody"]
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
 
-func get_type():
-	return "player"
-
 # Variaveis importantes para o personagem
 # Lista de variaveis internas do player
 var total_time: float  = 0
