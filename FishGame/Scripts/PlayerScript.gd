@@ -50,15 +50,9 @@ func _physics_process(delta):
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
 	if colision:
-<<<<<<< HEAD
-		#print(colision.get_collider().name)
 		if enemys.has(colision.get_collider().name):
-=======
-#		print(colision.get_collider().name)
-		if colision.get_collider().name == "Fish Enemy Body":
->>>>>>> 23-implementar-o-um-minimapa-do-player
 			if timer_dash > 0:
-				colision.get_collider().hurt(100)
+				colision.get_collider().hurt(20)
 
 # Troca o estado do peixe
 func set_state(new_state):
@@ -179,7 +173,7 @@ func hurt(dano = 1):
 		
 
 func die():
-#	self.queue_free()
+	get_tree().change_scene("res://Scenes/GameOver.tscn")
 	pass
 	
 # Funções relacionadas a entrar e sair da agua

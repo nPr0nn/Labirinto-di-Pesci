@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var Game = get_node("/root/Singleton")
+
 var models = { "BigEnemy": preload("res://Scenes/BigEnemy.tscn"),
 				"LittleEnemy": preload("res://Scenes/LittleEnemy.tscn"),
 				"box": preload("res://Scenes/Caixa.tscn") }
@@ -18,6 +20,7 @@ func build_map(x,y):
 			if dados[i][j] == "#":
 				addObject("box", j*escala+x, i*escala+y)
 			if dados[i][j] == "B":
+				Game.addBoss()
 				addObject("BigEnemy", j*escala+x, i*escala+y)
 			if dados[i][j] == "L":
 				addObject("LittleEnemy", j*escala+x, i*escala+y) 

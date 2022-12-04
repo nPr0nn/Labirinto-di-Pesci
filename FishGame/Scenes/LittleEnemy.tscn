@@ -15,7 +15,7 @@ height = 26.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 220.111
 
-[node name="LittleEnemy" type="Node2D" groups=["enemies"]]
+[node name="LittleEnemy" type="Node2D" groups=["minimap_objects"]]
 
 [node name="LittleEnemyBody" type="KinematicBody2D" parent="."]
 script = ExtResource( 1 )

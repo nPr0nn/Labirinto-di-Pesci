@@ -12,6 +12,10 @@ var rnd = RandomNumberGenerator.new()
 var armor = 0.1
 onready var update_tween = $UpdateTween
 
+var minimap_icon = "enemy"
+
+signal removed
+
 func _ready():
 	 rnd.randomize()
 
@@ -46,8 +50,12 @@ func hurt(dano = 1):
 	hp-=dano*(1-self.armor)
 	health_bar._on_health_updated(hp,0)
 	if hp<=0:
-		queue_free()
+		dead()
 
+func dead():
+	emit_signal("removed", get_parent())
+	get_parent().queue_free()
+	
 func _on_Vision_body_entered(body):
 	if body.name == "PlayerBody":
 		player = body
