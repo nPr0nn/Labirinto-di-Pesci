@@ -41,11 +41,17 @@ func _physics_process(delta):
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
 			
-func hurt(dano = 1):
+func hurt(dano = 1, show = true):
+	if typeof(dano) != 2 or dano < 0:
+		return "valor de dano invalido"
 	hp-=dano*(1-self.armor)
-	health_bar._on_health_updated(hp,0)
+	if show:
+		health_bar._on_health_updated(hp,0)
 	if hp<=0:
+		if !show:
+			return "dead"
 		dead()
+	return hp
 		
 func dead():
 	Game.bossKill()

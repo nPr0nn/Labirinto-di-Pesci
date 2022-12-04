@@ -10,8 +10,8 @@
 [ext_resource path="res://Scenes/followDot.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 7.0
-height = 26.0
+radius = 19.0
+height = 20.0001
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 220.111
@@ -50,7 +50,7 @@ position = Vector2( -6, 3 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BigEnemy Body"]
-position = Vector2( 0, -1 )
+position = Vector2( 4, 2 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
