@@ -4,7 +4,8 @@ onready var Game = get_node("/root/Singleton")
 
 var models = { "BigEnemy": preload("res://Scenes/BigEnemy.tscn"),
 				"LittleEnemy": preload("res://Scenes/LittleEnemy.tscn"),
-				"box": preload("res://Scenes/Caixa.tscn") }
+				"box": preload("res://Scenes/Caixa.tscn"),
+				"Food": preload("res://Scenes/Food.tscn")}
 
 
 var escala = 64
@@ -24,6 +25,8 @@ func build_map(x,y):
 				addObject("BigEnemy", j*escala+x, i*escala+y)
 			if dados[i][j] == "L":
 				addObject("LittleEnemy", j*escala+x, i*escala+y) 
+			if dados[i][j] == "F":
+				addObject("Food", j*escala+x, i*escala+y)
 	
 func load_file(file, dados):
 	var f = File.new()
