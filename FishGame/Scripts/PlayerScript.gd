@@ -185,3 +185,9 @@ func _on_Water_body_exited(body):
 	if(body.name == "PlayerBody"):
 		velocity *= 2.7
 		set_state(STATE.FALLING)
+
+func heal(amount):
+	hp += amount
+	if (hp > 100):
+		hp = 100
+	health_bar._on_health_updated(hp,0)
