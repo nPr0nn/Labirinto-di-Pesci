@@ -11,6 +11,9 @@ onready var health_bar = $Healthbar
 var rnd = RandomNumberGenerator.new()
 var armor = 0.1
 onready var update_tween = $UpdateTween
+var timeStarted = false
+onready var timerReal = get_node("Timer")
+var pushBackSpeed = 200
 
 var minimap_icon = "enemy"
 
@@ -24,9 +27,9 @@ func _physics_process(delta):
 	self.look_at(velocity+self.global_position)
 	
 	
-	if player != null:
+	if player != null and !timeStarted:
 		velocity = (player.global_position - global_position).normalized() * maxSpeed
-	else:
+	elif !timeStarted:
 		if timer <=0:
 			#print("muda velocidade")
 			var dir = Vector2(rnd.randf_range(-1,1),rnd.randf_range(-1,1))
@@ -38,14 +41,26 @@ func _physics_process(delta):
 			timer =200
 
 	velocity = move_and_slide(velocity)
+	if timeStarted:
+		look_at(-velocity+self.global_position)
 	
 	#colisions
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
+			collision.collider.pushBack(self.global_position) #new
+			self.pushBack(collision.collider.global_position) #new
 	timer -= 1
 			
+
+func pushBack(enemyPosition):#new
+	var pushBackDirection = (self.global_position - enemyPosition).normalized()
+	velocity = pushBackDirection * pushBackSpeed
+	timerReal.set_wait_time(0.2)
+	timerReal.start()
+	timeStarted = true
+
 func hurt(dano = 1, show = true):
 	if typeof(dano) != 2 or dano < 0:
 		return "valor de dano invalido"
@@ -71,3 +86,8 @@ func _on_Vision_body_entered(body):
 func _on_Vision_body_exited(body):
 	if body.name == "PlayerBody":
 		player = null
+
+
+func _on_Timer_timeout():
+	timeStarted = false
+	timerReal.stop()
