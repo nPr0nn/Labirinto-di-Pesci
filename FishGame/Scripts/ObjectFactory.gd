@@ -1,29 +1,52 @@
 extends Node2D
 
+onready var escala = 64
 onready var Game = get_node("/root/Singleton")
 
 var models = { "BigEnemy": preload("res://Scenes/BigEnemy.tscn"),
 				"LittleEnemy": preload("res://Scenes/LittleEnemy.tscn"),
 				"box": preload("res://Scenes/Caixa.tscn") }
-
-
-var escala = 64
-
+				
 func _ready():
 	pass
+
+func set_scale(nova_escala):
+	if(typeof(nova_escala) != TYPE_INT or nova_escala <= 0):
+		print("Input inválido. Escala precisa ser um inteiro positivo")
+		escala = null
+		return false
+
+	if(nova_escala > 2048):
+		nova_escala = 2048
+		
+	escala = nova_escala
+	return true
 	
-func build_map(x,y):
+func get_scale():
+	return escala
+
+func load_map(file_path):
 	var dados = []
 	load_file("res://Data/mapa.txt", dados)
-	for i in range(len(dados)):
-		for j in range(len(dados[i])):
+	return dados
+
+func get_dim(dados):
+	if(len(dados) == 0):
+		return Vector2(0, 0)
+	var dim = Vector2(len(dados[0]), len(dados));
+	return dim 
+
+func build_map(x, y, dados):
+	var dim = get_dim(dados)
+	for i in range(dim.y):
+		for j in range(dim.x):
 			if dados[i][j] == "#":
-				addObject("box", j*escala+x, i*escala+y)
+				addObject("box", j*escala+x, i*escala+y, dim*escala)
 			if dados[i][j] == "B":
 				Game.addBoss()
-				addObject("BigEnemy", j*escala+x, i*escala+y)
+				addObject("BigEnemy", j*escala+x, i*escala+y, dim*escala)
 			if dados[i][j] == "L":
-				addObject("LittleEnemy", j*escala+x, i*escala+y) 
+				addObject("LittleEnemy", j*escala+x, i*escala+y, dim*escala) 
 	
 func load_file(file, dados):
 	var f = File.new()
@@ -33,19 +56,22 @@ func load_file(file, dados):
 	f.close()
 	return
 
-func addObjectCol(type, number_of_objects, row, col, size):
-	for i in range(number_of_objects):
-		addObject(type, row, size*i - col) 
+func addObject(type, x, y, world_limits, show=true):
+	var object = models[type].instance()
+	object.global_position = Vector2(x,y)
+	
+	if(object.global_position.x >= world_limits.x or object.global_position.x < 0):
+		print("Posição inválida de spawn de objeto")
+		return null
 
-func addObjectRow(type, number_of_objects, row, col, size):
-	for i in range(number_of_objects):
-		addObject(type, row + i*size, col) 
-
-func addObject(type,x,y):
-	var enemy = models[type].instance()
-	enemy.global_position = Vector2(x,y)
-	add_child(enemy)
-	return enemy
+	if(object.global_position.y > world_limits.y ):
+		print("Posição inválida de spawn de objeto")
+		return null
+#
+	if show:
+		add_child(object)
+	
+	return object
 
 func _process(delta):
 	pass
