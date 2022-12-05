@@ -7,26 +7,44 @@ var models = { "BigEnemy": preload("res://Scenes/BigEnemy.tscn"),
 				"box": preload("res://Scenes/Caixa.tscn"),
 				"Food": preload("res://Scenes/Food.tscn")}
 
+var objetos = {"#" : 0,"B":0,"L" : 0,"F":0,".":0}
 
 var escala = 64
 
 func _ready():
 	pass
-	
-func build_map(x,y):
+
+func build_map(x,y,show=true,simbol="#",caminho = "mapa"):
 	var dados = []
-	load_file("res://Data/mapa.txt", dados)
+	
+	if !File.new().file_exists("res://Data/"+caminho+".txt"):
+		return "aquivo do mapa nao existe"
+
+
+	load_file("res://Data/"+caminho+".txt", dados)
 	for i in range(len(dados)):
 		for j in range(len(dados[i])):
+			if !show:
+				objetos[dados[i][j]]+=1
 			if dados[i][j] == "#":
-				addObject("box", j*escala+x, i*escala+y)
+				if show:
+					addObject("box", j*escala+x, i*escala+y)
 			if dados[i][j] == "B":
-				Game.addBoss()
-				addObject("BigEnemy", j*escala+x, i*escala+y)
+				if show:
+					Game.addBoss()
+					addObject("BigEnemy", j*escala+x, i*escala+y)
 			if dados[i][j] == "L":
-				addObject("LittleEnemy", j*escala+x, i*escala+y) 
+				if show:
+					addObject("LittleEnemy", j*escala+x, i*escala+y) 
 			if dados[i][j] == "F":
-				addObject("Food", j*escala+x, i*escala+y)
+				if show:
+					addObject("Food", j*escala+x, i*escala+y)
+	if !show:
+		if simbol in objetos:
+			return objetos[simbol]
+		else:
+			return 0
+			
 	
 func load_file(file, dados):
 	var f = File.new()
