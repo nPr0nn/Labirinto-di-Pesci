@@ -3,7 +3,8 @@ extends Node2D
 onready var object_factory = $objectFactory
 
 func _ready():
-	object_factory.build_map(-187,-1186)
+	var dados = object_factory.load_map("res://Data/mapa.txts")
+	object_factory.build_map(0,-1186, dados)
 	pass
 	
 # func _process(_delta):
