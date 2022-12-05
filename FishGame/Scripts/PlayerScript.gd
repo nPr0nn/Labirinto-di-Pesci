@@ -12,9 +12,6 @@ var enemys = ["BigEnemy Body", "LittleEnemyBody"]
 # Estados em que o personagem do player pode se encontrar
 enum STATE {SWIMMING, FALLING}
 
-func get_type():
-	return "player"
-
 # Variaveis importantes para o personagem
 # Lista de variaveis internas do player
 var total_time: float  = 0
@@ -185,3 +182,16 @@ func _on_Water_body_exited(body):
 	if(body.name == "PlayerBody"):
 		velocity *= 2.7
 		set_state(STATE.FALLING)
+
+func heal(amount,show  = true):
+	if typeof(amount) == 2:
+		var old_hp = hp
+		hp += amount
+		if (hp > 100):
+			hp = 100
+		if show: 
+			health_bar._on_health_updated(hp,0)
+		return (hp - old_hp)
+	else:
+		return "Entrada invalida para a função."
+		
