@@ -6,6 +6,7 @@ var player = null
 var velocity = Vector2.ZERO
 var maxSpeed = 110
 var vacantSpeed = 80
+var pushBackSpeed = 20
 var hp: int = 100
 var followDot = null
 onready var health_bar = $Healthbar
@@ -40,6 +41,9 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
 			collision.collider.hurt()
+			collision.collider.pushBack(self.global_position) #new
+			self.pushBack(collision.collider.global_position) #new
+			
 			
 func hurt(dano = 1, show = true):
 	if typeof(dano) != 2 or dano < 0:
@@ -52,7 +56,11 @@ func hurt(dano = 1, show = true):
 			return "dead"
 		dead()
 	return hp
-		
+	
+func pushBack(enemyPosition):#new
+	var pushBackDirection = (self.global_position - enemyPosition).normalized()
+	velocity = pushBackDirection * pushBackSpeed
+	
 func dead():
 	Game.bossKill()
 	emit_signal("removed", get_parent())
