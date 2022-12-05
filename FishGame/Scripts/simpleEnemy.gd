@@ -48,7 +48,7 @@ func _physics_process(delta):
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if collision.collider.name == "PlayerBody":
-			collision.collider.hurt()
+			collision.collider.hurt(5)
 			collision.collider.pushBack(self.global_position) #new
 			self.pushBack(collision.collider.global_position) #new
 	timer -= 1
