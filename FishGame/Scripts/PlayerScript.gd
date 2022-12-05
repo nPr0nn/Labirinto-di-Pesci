@@ -16,6 +16,7 @@ enum STATE {SWIMMING, FALLING}
 # Lista de variaveis internas do player
 var total_time: float  = 0
 var speed: float       = 0
+var pushBackSpeed = 35
 var velocity: Vector2  = Vector2(0,0)
 var acceleration: float = 0.2
 var timer_dash: int = 0
@@ -168,6 +169,10 @@ func hurt(dano = 1):
 		hp -= dano
 		health_bar._on_health_updated(hp,0)
 		
+
+func pushBack(enemyPosition):#new
+	var pushBackDirection = (self.global_position - enemyPosition).normalized()
+	velocity = pushBackDirection * pushBackSpeed
 
 func die():
 	get_tree().change_scene("res://Scenes/GameOver.tscn")

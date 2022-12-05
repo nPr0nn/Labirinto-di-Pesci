@@ -72,6 +72,9 @@ margin_right = -44.0
 margin_bottom = -33.0
 rect_scale = Vector2( 0.181177, 0.116737 )
 
+[node name="Timer" type="Timer" parent="BigEnemy Body"]
+wait_time = 1.5
+
 [node name="Caminho" type="Path2D" parent="."]
 visible = false
 position = Vector2( -300, 1420 )
@@ -86,3 +89,4 @@ rotation = -0.169109
 
 [connection signal="body_entered" from="BigEnemy Body/Vision" to="BigEnemy Body" method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="BigEnemy Body/Vision" to="BigEnemy Body" method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="BigEnemy Body/Timer" to="BigEnemy Body" method="_on_Timer_timeout"]

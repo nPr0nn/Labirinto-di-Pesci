@@ -64,5 +64,8 @@ rect_scale = Vector2( 0.181177, 0.116737 )
 
 [node name="UpdateTween" type="Tween" parent="LittleEnemyBody"]
 
+[node name="Timer" type="Timer" parent="LittleEnemyBody"]
+
 [connection signal="body_entered" from="LittleEnemyBody/Vision" to="LittleEnemyBody" method="_on_Vision_body_entered"]
 [connection signal="body_exited" from="LittleEnemyBody/Vision" to="LittleEnemyBody" method="_on_Vision_body_exited"]
+[connection signal="timeout" from="LittleEnemyBody/Timer" to="LittleEnemyBody" method="_on_Timer_timeout"]
