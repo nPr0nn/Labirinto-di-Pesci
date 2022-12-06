@@ -86,10 +86,12 @@ func addObject(type, x, y, world_limits, show=true):
 	
 	if(object.global_position.x >= world_limits.x or object.global_position.x < 0):
 		print("Posição inválida de spawn de objeto")
+		object.free()
 		return null
 
 	if(object.global_position.y > world_limits.y ):
 		print("Posição inválida de spawn de objeto")
+		object.free()
 		return null
 
 	if show:

@@ -4,16 +4,16 @@ Projeto da disciplina de engenharia de software (MC426) do segundo semestre de 2
 Jogo 2D de puzzle e exploração sobre um peixe de estimação de cientistas do mal, feito com a Godot engine.
 
 
-## Estilos Arquiteturais e Padrões de Projeto
+## Estilos Arquiteturais
 
 A arquitetura decidida tem como base o estilo de camadas (Layering), e para sua implementação foi adicionado aspectos tanto do estilo
 mediador, no que tange a interface entre os arquivos de dados guardados em um diretório de database e as componentes do jogo, quanto
-do estilo de objetos na estrutura dos principais componentes do jogo, como entidades que interagem com o jogador.
-Com o intuito de resolver um problema de projeto geral um dos principais padrões de projeto adotados foi o *Abstract Factory*, o qual
-foi feito por meio da utilização de uma fábrica abstrata para poder realizar abstrações de objetos do jogo. 
-Assim, os estilos arquiteturais utilizados foram: *Camadas*, *Mediador*, *Orientação à objetos* 
-e os padrões de projeto adotados foram: *Asbtract Factory*.
+do estilo de objetos na estrutura dos principais componentes do jogo, como entidades que interagem com o jogador. Assim, os estilos arquiteturais utilizados foram: *Camadas*, *Mediador*, *Orientação à objetos* 
 
+## Padrão de Projeto
+Com o intuito de resolver um problema geral de projeto um dos principais padrões de projeto adotados foi o *State* pelo qual foi implementado um sistema
+de Máquina de Estado Finito no personagem do player no arquivo PlayerScript.gd, de forma a organizar a classe do personagem pois desta forma ela assume comportamentos
+diferentes caso o player esteja com o peixe dentro ou fora da água.
 
 ## Diagrama de Componentes
 Para melhor apresentação da arquitetura utilizada foi usado o modelo C4.

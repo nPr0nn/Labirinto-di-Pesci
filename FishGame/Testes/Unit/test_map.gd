@@ -8,6 +8,9 @@ var resultado
 func before_each():
 	objectFactory = _objectFactory.new()
 
+func after_each():
+	objectFactory.free()
+	
 func test_principal_wall():
 	simbolo = "#"
 	resultado = objectFactory.build_map(0,0,false,simbolo)

@@ -9,7 +9,10 @@ var resultado
 func before_each():
 	bigEnemy = _bigEnemy.new()
 	littleEnemy = _littleEnemy.new()
-
+func after_each():
+	bigEnemy.free()
+	littleEnemy.free()
+	
 func test_hurt_big_enemy_valid_100():
 	dano = 100
 	resultado = bigEnemy.hurt(dano,false)

@@ -73,15 +73,15 @@ func test_setget_scale_8():
 func test_map_dimensions_1():
 	var mapa = ['#...........#', '#...........#', '#...........#']
 	var dim = factory.get_dim(mapa)
-	assert_eq(dim.x, 13, 'Comprimento do mapa correto')
-	assert_eq(dim.y, 3, 'Comprimento do mapa correto')
+	assert_eq(dim.x, 13.0, 'Comprimento do mapa correto')
+	assert_eq(dim.y, 3.0, 'Comprimento do mapa correto')
 	pass
 	
 func test_map_dimensions_2():
 	var mapa = []
 	var dim = factory.get_dim(mapa)
-	assert_eq(dim.x, 0, 'Comprimento do mapa correto')
-	assert_eq(dim.y, 0, 'Comprimento do mapa correto')
+	assert_eq(dim.x, 0.0, 'Comprimento do mapa correto')
+	assert_eq(dim.y, 0.0, 'Comprimento do mapa correto')
 	pass
 		
 func test_map_dimensions_3():
@@ -92,8 +92,8 @@ func test_map_dimensions_3():
 			linha.append('#')
 		mapa.append(linha)
 	var dim = factory.get_dim(mapa)
-	assert_eq(dim.x, 300, 'Comprimento do mapa correto')
-	assert_eq(dim.y, 100000, 'Comprimento do mapa correto')
+	assert_eq(dim.x, 300.0, 'Comprimento do mapa correto')
+	assert_eq(dim.y, 100000.0, 'Comprimento do mapa correto')
 	pass
 	
 # Testa se o spawn de objetos foi feito em uma posição permitida
@@ -103,10 +103,11 @@ func test_spawn_1():
 	var mapa    = factory.load_map("res://Data/mapa.txt")
 	var dim     = factory.get_dim(mapa)
 	
-	var object = factory.addObject("BigEnemy", 200, 200, dim*escala)
+	var object = factory.addObject("BigEnemy", 200.0, 200.0, dim*escala, false)
 	assert_true(object != null, 'Objeto foi criado')
-	assert_eq(object.global_position.x, 200, 'Posição x do objeto no mapa correta')
-	assert_eq(object.global_position.y, 200, 'Posição y do objeto no mapa correta')
+	assert_eq(object.global_position.x, 200.0, 'Posição x do objeto no mapa correta')
+	assert_eq(object.global_position.y, 200.0, 'Posição y do objeto no mapa correta')
+	object.free()
 	
 func test_spawn_2():
 	var setado  = factory.set_scale(64)
@@ -114,10 +115,11 @@ func test_spawn_2():
 	var mapa    = factory.load_map("res://Data/mapa.txt")
 	var dim     = factory.get_dim(mapa)
 	
-	var object = factory.addObject("BigEnemy", 0, 0, dim*escala)
+	var object = factory.addObject("BigEnemy", 0, 0, dim*escala, false)
 	assert_true(object != null, 'Objeto foi criado')
-	assert_eq(object.global_position.x, 0, 'Posição x do objeto no mapa correta')
-	assert_eq(object.global_position.y, 0, 'Posição y do objeto no mapa correta')
+	assert_eq(object.global_position.x, 0.0, 'Posição x do objeto no mapa correta')
+	assert_eq(object.global_position.y, 0.0, 'Posição y do objeto no mapa correta')
+	object.free()
 	
 func test_spawn_3():
 	var setado  = factory.set_scale(64)
@@ -125,7 +127,7 @@ func test_spawn_3():
 	var mapa    = factory.load_map("res://Data/mapa.txt")
 	var dim     = factory.get_dim(mapa)
 	
-	var object = factory.addObject("BigEnemy", -1, -1, dim*escala)
+	var object = factory.addObject("BigEnemy", -1, -1, dim*escala, false)
 	assert_true(object == null, 'Objeto não foi criado pois a posição é invalida')
 	
 func test_spawn_4():
@@ -134,7 +136,7 @@ func test_spawn_4():
 	var mapa    = factory.load_map("res://Data/mapa.txt")
 	var dim     = factory.get_dim(mapa)
 	
-	var object = factory.addObject("BigEnemy", 1000, 2000, dim*escala)
+	var object = factory.addObject("BigEnemy", 1000, 2000, dim*escala, false)
 	assert_true(object == null, 'Objeto não foi criado pois a posição é invalida')
 	
 func test_spawn_5():
@@ -143,7 +145,6 @@ func test_spawn_5():
 	var mapa    = factory.load_map("res://Data/mapa.txt")
 	var dim     = factory.get_dim(mapa)
 	
-	var object = factory.addObject("BigEnemy", escala*(dim.x), escala*(dim.y), dim*escala)
-	assert_true(object == null, 'Objeto foi criado pois a posição é valida')
-	
+	var object = factory.addObject("BigEnemy", escala*(dim.x), escala*(dim.y), dim*escala, false)
+	assert_true(object == null, 'Objeto não foi criado pois a posição é invalida')
 	
