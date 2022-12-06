@@ -48,9 +48,13 @@ func _physics_process(delta):
 	state._physics_process(delta)
 	var colision = move_and_collide(velocity)
 	if colision:
+		
 		if enemys.has(colision.get_collider().name):
-			if timer_dash > 0:
+			if timer_dash > -30:
 				colision.get_collider().hurt(20)
+				
+#				colision.collider.pushBack(self.global_position) #new
+#				self.pushBack(colision.collider.global_position) #new
 
 # Troca o estado do peixe
 func set_state(new_state):
