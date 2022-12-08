@@ -49,7 +49,7 @@ func _physics_process(delta):
 	if colision:
 		
 		if enemys.has(colision.get_collider().name):
-			if state.canBInjured:
+			if state.canHurt:
 			#if timer_dash > -30:
 				colision.get_collider().hurt(20)
 				
@@ -78,6 +78,7 @@ class SwimmingState:
 	
 	func _init(fish):
 		self.fish = fish
+		canHurt = false
 
 	func _process(delta):
 		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
@@ -96,6 +97,9 @@ class SwimmingState:
 	func _input():
 		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
 			fish.move_with_mouse()
+			if(Input.is_mouse_button_pressed(2)):
+				fish.set_state(STATE.DASHING)
+			
 		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
 			fish.move_with_keyboard()
 		pass
@@ -135,38 +139,53 @@ class FallingState:
 	func exit():
 		pass
 
-class DashingState extends SwimmingState:
+class DashingState:
+	
+	var fish
+	var gravity_on_water: Vector2  = Vector2(0, 0.001)
+	var max_speed_on_water: float  = 10
+	var friction_on_water: float   = 0.97
+	var canBInjured: bool = false
+	var canHurt: bool = true
+	var timer_dash: int = 4
+	var upspeed: int = 2
 	
 	func _init(fish):
-		var timer_dash: int = 4
-		canBInjured = false
-		max_speed_on_water= 10
-		canHurt = true
+		self.fish = fish
+	
+	func _process(delta):
+		pass
 	
 	func _physics_process(delta):
 		fish.velocity += gravity_on_water
 		fish.speed = min(fish.velocity.length(), max_speed_on_water)
-		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_water
+		fish.velocity = fish.velocity.normalized()*fish.speed*friction_on_water*upspeed
 		
 		timer_dash-=1
-		if fish.timer_dash < 0:
+		if timer_dash < 0:
 			max_speed_on_water = 4.5
 			
-		if fish.timer_dash < -70:
+		if timer_dash < -20:
 			canHurt = false
 			
-		if fish.timer_dash < -70:
+		if timer_dash < -50:
 			canBInjured = true
+			
+		if timer_dash < 0:
+			self.upspeed = 1
 			
 			
 		if(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.MOUSE):
-			if fish.timer_dash < -80:
+			if timer_dash < -60:
 				fish.set_state(STATE.SWIMMING)
 		elif(fish.Game.gameplay_type == fish.Game.GAMEPLAY_TYPE.KEYBOARD):
-			if fish.timer_dash < -32:
+			if timer_dash < -32:
 				fish.set_state(STATE.SWIMMING)
 				
 	func _input():
+		pass
+	
+	func exit():
 		pass
 			
 		
@@ -183,8 +202,6 @@ func move_with_mouse():
 		var mouse_position = mouse_position_on_viewport + global_position 
 		speed += acceleration
 		velocity = (global_position.direction_to(mouse_position).normalized() * speed)
-	if(Input.is_mouse_button_pressed(2) and state == STATE.SWIMMING):
-		set_state(STATE.DASHING)
 
 func move_with_keyboard():
 	if(Input.is_action_pressed("ui_up")):
