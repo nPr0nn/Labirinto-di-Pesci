@@ -17,8 +17,6 @@ windows:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
       - build/windows
-  tags:
-    - dev
 
 linux:
   stage: export
@@ -29,8 +27,6 @@ linux:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
       - build/linux
-  tags:
-    - dev
 
 web:
   stage: export
@@ -41,5 +37,3 @@ web:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
       - build/web
-  tags:
-    - dev
