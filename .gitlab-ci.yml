@@ -41,7 +41,7 @@ web:
 gut:
   stage: test
   script:
-    - godot -s addons/gut/gut_cmdln.gd -d --path $PWD -gdir=res://Test/Unit -gprefix=test_ -gsuffix=.gd
+    - godot -s addons/gut/gut_cmdln.gd -d --path $PWD -gdir=res://Test/Unit -gprefix=test_ -gsuffix=.gd -gexit
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
