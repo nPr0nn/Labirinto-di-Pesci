@@ -1,0 +1,10 @@
+{
+    "dirs":["res://Test/Unit/"],
+    "ignore_pause":true,
+    "include_subdirs":true,
+    "log_level":1,
+    "prefix":"test_",
+    "should_exit":false,
+    "should_maximize":true,
+    "suffix":".gd"
+  }
