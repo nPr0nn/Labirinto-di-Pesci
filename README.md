@@ -1,4 +1,4 @@
-# Fish! Ball! CAT!!
+# Labirinto di Pesci
 
 Projeto da disciplina de engenharia de software (MC426) do segundo semestre de 2022. 
 Jogo 2D de puzzle e exploração sobre um peixe de estimação de cientistas do mal, feito com a Godot engine.
